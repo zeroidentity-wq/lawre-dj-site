@@ -199,50 +199,119 @@ export interface Page {
   id: number;
   title: string;
   slug: string;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts".
- */
-export interface Post {
-  id: number;
-  title: string;
-  slug: string;
-  cover?: (number | null) | Media;
-  excerpt?: string | null;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  publishedAt?: string | null;
+  layout?:
+    | (
+        | {
+            eyebrow?: string | null;
+            heading: string;
+            subtitle?: string | null;
+            ctaPrimary?: {
+              label?: string | null;
+              href?: string | null;
+            };
+            ctaSecondary?: {
+              label?: string | null;
+              href?: string | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            content: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'richText';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            subtitle?: string | null;
+            /**
+             * Lasă gol ca să afișezi toate serviciile.
+             */
+            services?: (number | Service)[] | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'servicesGrid';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            subtitle?: string | null;
+            /**
+             * Lasă gol ca să afișezi toate pachetele.
+             */
+            packages?: (number | Package)[] | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'packages';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            gallery: number | Gallery;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'galleryStrip';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            eventType?: ('all' | 'nunta' | 'botez' | 'corporate' | 'club' | 'majorat' | 'privata') | null;
+            max?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'testimonials';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            items?:
+              | {
+                  question: string;
+                  answer: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faq';
+          }
+        | {
+            heading: string;
+            body?: string | null;
+            primaryLabel?: string | null;
+            primaryHref?: string | null;
+            secondaryLabel?: string | null;
+            secondaryHref?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cta';
+          }
+      )[]
+    | null;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    noindex?: boolean | null;
+    canonicalUrl?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -254,30 +323,128 @@ export interface Service {
   id: number;
   title: string;
   slug: string;
+  eyebrow?: string | null;
   shortDescription?: string | null;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  heroImage?: (number | null) | Media;
   startingPrice?: number | null;
-  faq?:
-    | {
-        question: string;
-        answer: string;
-        id?: string | null;
-      }[]
+  relatedPackages?: (number | Package)[] | null;
+  layout?:
+    | (
+        | {
+            eyebrow?: string | null;
+            heading: string;
+            subtitle?: string | null;
+            ctaPrimary?: {
+              label?: string | null;
+              href?: string | null;
+            };
+            ctaSecondary?: {
+              label?: string | null;
+              href?: string | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            content: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'richText';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            subtitle?: string | null;
+            /**
+             * Lasă gol ca să afișezi toate serviciile.
+             */
+            services?: (number | Service)[] | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'servicesGrid';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            subtitle?: string | null;
+            /**
+             * Lasă gol ca să afișezi toate pachetele.
+             */
+            packages?: (number | Package)[] | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'packages';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            gallery: number | Gallery;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'galleryStrip';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            eventType?: ('all' | 'nunta' | 'botez' | 'corporate' | 'club' | 'majorat' | 'privata') | null;
+            max?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'testimonials';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            items?:
+              | {
+                  question: string;
+                  answer: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'faq';
+          }
+        | {
+            heading: string;
+            body?: string | null;
+            primaryLabel?: string | null;
+            primaryHref?: string | null;
+            secondaryLabel?: string | null;
+            secondaryHref?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cta';
+          }
+      )[]
     | null;
+  /**
+   * JSON-LD custom (opțional). Lasă gol pentru a folosi schema generată automat.
+   */
+  schema?: string | null;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    noindex?: boolean | null;
+    canonicalUrl?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -318,21 +485,6 @@ export interface Package {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "equipment".
- */
-export interface Equipment {
-  id: number;
-  name: string;
-  brand?: string | null;
-  model?: string | null;
-  category?: ('mixer' | 'controller' | 'speakers' | 'lighting' | 'microphone' | 'cdj' | 'other') | null;
-  description?: string | null;
-  image?: (number | null) | Media;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "galleries".
  */
 export interface Gallery {
@@ -347,6 +499,65 @@ export interface Gallery {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  title: string;
+  slug: string;
+  cover?: (number | null) | Media;
+  excerpt?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  publishedAt?: string | null;
+  status: 'draft' | 'published';
+  category?: ('dj-nunta' | 'dj-corporate' | 'dj-club' | 'dj-botez-majorat' | 'evergreen') | null;
+  tags?:
+    | {
+        tag: string;
+        id?: string | null;
+      }[]
+    | null;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    ogImage?: (number | null) | Media;
+    noindex?: boolean | null;
+    canonicalUrl?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "equipment".
+ */
+export interface Equipment {
+  id: number;
+  name: string;
+  brand?: string | null;
+  model?: string | null;
+  category?: ('mixer' | 'controller' | 'speakers' | 'lighting' | 'microphone' | 'cdj' | 'other') | null;
+  description?: string | null;
+  image?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -606,7 +817,113 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  content?: T;
+  layout?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              subtitle?: T;
+              ctaPrimary?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                  };
+              ctaSecondary?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        richText?:
+          | T
+          | {
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        servicesGrid?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              subtitle?: T;
+              services?: T;
+              id?: T;
+              blockName?: T;
+            };
+        packages?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              subtitle?: T;
+              packages?: T;
+              id?: T;
+              blockName?: T;
+            };
+        galleryStrip?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              gallery?: T;
+              id?: T;
+              blockName?: T;
+            };
+        testimonials?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              eventType?: T;
+              max?: T;
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              items?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        cta?:
+          | T
+          | {
+              heading?: T;
+              body?: T;
+              primaryLabel?: T;
+              primaryHref?: T;
+              secondaryLabel?: T;
+              secondaryHref?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+        noindex?: T;
+        canonicalUrl?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -621,6 +938,23 @@ export interface PostsSelect<T extends boolean = true> {
   excerpt?: T;
   content?: T;
   publishedAt?: T;
+  status?: T;
+  category?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+        noindex?: T;
+        canonicalUrl?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -631,15 +965,118 @@ export interface PostsSelect<T extends boolean = true> {
 export interface ServicesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  eyebrow?: T;
   shortDescription?: T;
-  content?: T;
+  heroImage?: T;
   startingPrice?: T;
-  faq?:
+  relatedPackages?: T;
+  layout?:
     | T
     | {
-        question?: T;
-        answer?: T;
-        id?: T;
+        hero?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              subtitle?: T;
+              ctaPrimary?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                  };
+              ctaSecondary?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        richText?:
+          | T
+          | {
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        servicesGrid?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              subtitle?: T;
+              services?: T;
+              id?: T;
+              blockName?: T;
+            };
+        packages?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              subtitle?: T;
+              packages?: T;
+              id?: T;
+              blockName?: T;
+            };
+        galleryStrip?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              gallery?: T;
+              id?: T;
+              blockName?: T;
+            };
+        testimonials?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              eventType?: T;
+              max?: T;
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              items?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        cta?:
+          | T
+          | {
+              heading?: T;
+              body?: T;
+              primaryLabel?: T;
+              primaryHref?: T;
+              secondaryLabel?: T;
+              secondaryHref?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  schema?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogImage?: T;
+        noindex?: T;
+        canonicalUrl?: T;
       };
   updatedAt?: T;
   createdAt?: T;
