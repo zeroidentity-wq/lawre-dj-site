@@ -7,3 +7,8 @@
   Evenimente) cu conținut minim viabil — hero, featureGrid 3-4 items, processSteps 3 pași, packages block, FAQ 5 întrebări, CTA. Refolosește patternul din
   seed-dj-nunta.ts și componentele existente — fără explorare extinsă. Generezi tu textele în RO, SEO-friendly pe keywords-urile Tier 2 din CLAUDE.md. Plan mode
   înainte de cod.
+
+  DATABASE_URI=postgresql://neondb_owner:npg_igE7eH8QSyFW@ep-lingering-sound-algp2iz2-pooler.c-3.eu-central-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+  PAYLOAD_SECRET=b74ae7900e3afb725b485de92679db1bc89722db4d0041ad9a3397b311ee634d
+  NEXT_PUBLIC_SERVER_URL=http://localhost:3000
+
