@@ -281,6 +281,36 @@ export interface Page {
         | {
             eyebrow?: string | null;
             heading?: string | null;
+            subtitle?: string | null;
+            columns?: ('2' | '3' | '4') | null;
+            items?:
+              | {
+                  title: string;
+                  body: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'featureGrid';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            steps?:
+              | {
+                  label: string;
+                  body: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'processSteps';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
             items?:
               | {
                   question: string;
@@ -406,6 +436,36 @@ export interface Service {
             id?: string | null;
             blockName?: string | null;
             blockType: 'testimonials';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            subtitle?: string | null;
+            columns?: ('2' | '3' | '4') | null;
+            items?:
+              | {
+                  title: string;
+                  body: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'featureGrid';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            steps?:
+              | {
+                  label: string;
+                  body: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'processSteps';
           }
         | {
             eyebrow?: string | null;
@@ -887,6 +947,38 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        featureGrid?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              subtitle?: T;
+              columns?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        processSteps?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              steps?:
+                | T
+                | {
+                    label?: T;
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         faq?:
           | T
           | {
@@ -1037,6 +1129,38 @@ export interface ServicesSelect<T extends boolean = true> {
               heading?: T;
               eventType?: T;
               max?: T;
+              id?: T;
+              blockName?: T;
+            };
+        featureGrid?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              subtitle?: T;
+              columns?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        processSteps?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              steps?:
+                | T
+                | {
+                    label?: T;
+                    body?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

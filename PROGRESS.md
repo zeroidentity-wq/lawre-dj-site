@@ -4,8 +4,35 @@
 
 ## Status la zi
 
-**Faza curentă:** Faza 1 — DONE (2026-04-26).
-**Faza următoare:** Faza 2 — Frontend public.
+**Faza curentă:** Faza 2.5 — DONE (2026-04-28).
+**Faza următoare:** Faza 2.6 — restul paginilor de servicii (același template, conținut minim viabil).
+
+## Faza 2.5 — ce s-a livrat (2026-04-28)
+
+- Două blocuri noi în `src/blocks/`: `FeatureGrid.ts` (grid 2/3/4 col cu items title+body) și `ProcessSteps.ts` (pași numerotați auto). Înregistrate în `layoutBlocks` → disponibile pe Pages, Posts, Services.
+- Componente marketing noi: `PillarHero` (hero cu breadcrumbs + price-from + CTA dual), `Breadcrumbs` (vizual, semantic `<nav>/<ol>`), `FAQAccordion` (`<details>/<summary>`, JS-free toggle), `FeatureGrid`, `ProcessSteps`.
+- `src/components/blocks/RenderBlocks.tsx` — switch central pe `blockType`, mapează toate blocurile pe componentele lor (refoloseşte `CTABlock`, `PackageCard`, `TestimonialCard`, `ServiceCard`).
+- Lexical → JSX render via `@payloadcms/richtext-lexical/react` `<RichText data={...} />` (tipo `prose prose-invert prose-neon`).
+- Helper `src/lib/lexical.ts` — constructori minimali (`richDoc`, `p`, `pInline`, `h2`, `h3`, `ul`) ca să producem editor state JSON din scripturi seed fără să-l scriem manual.
+- Helper `src/lib/schema.ts` — `buildServiceSchema`, `buildFaqSchema`, `buildBreadcrumbSchema`, `findFaqBlock`. Service schema include `provider` LocalBusiness, `areaServed` București+Ilfov, și `AggregateOffer` din `relatedPackages.price`.
+- Route dinamic `src/app/(frontend)/servicii/[slug]/page.tsx` — `generateStaticParams` peste toate slug-urile, `generateMetadata` din `service.seo` cu fallback corect, ISR 1h, JSON-LD ×3 (Service, BreadcrumbList, FAQPage când există FAQ block).
+- **Seed script** `scripts/seed-dj-nunta.ts` (rulat cu `pnpm seed:dj-nunta`) — idempotent (find by slug, update sau create), creează și pachetele `essential`/`premium`/`platinum` dacă lipsesc, populează Service-ul „DJ Nuntă București" cu toate cele 9 blocuri din `lawre-package/dj-nunta-bucuresti.md` (rich text intro, feature grid 2x2, process steps 4, rich text pachete, packages block, FAQ cu 10 Q&A, testimonials filter `nunta`, CTA final). Încarcă `.env.local` via `dotenv` înainte de `await import('payload')` ca payload.config să citească corect `PAYLOAD_SECRET` și `DATABASE_URI`.
+
+**Verificare end-to-end făcută:**
+- `pnpm exec tsc --noEmit` → zero erori
+- `pnpm generate:types` → `payload-types.ts` are `featureGrid` și `processSteps` ca block types pe Service.layout
+- `pnpm seed:dj-nunta` (prima rulare) → `created service id=1 slug=dj-nunta-bucuresti` + 3 pachete
+- `pnpm seed:dj-nunta` (a doua rulare) → `updated service id=1` (idempotent ✓)
+- `GET /servicii/dj-nunta-bucuresti` → HTTP 200, ~120KB HTML
+- View source: 3 JSON-LD types prezente (Service, BreadcrumbList, FAQPage), 10×Question, 10×Answer, 3×ListItem, AggregateOffer, LocalBusiness provider — toate corecte
+- 10×`<details>` în FAQ accordion, 3 pachete render-ate, breadcrumbs prezente
+
+## Faza 2.1–2.4 — ce s-a livrat (2026-04-27 → 2026-04-28)
+
+- **Faza 2.1**: Tailwind 3.4 instalat și configurat cu paleta `ink`/`bone`/`neon`/`hairline`. Fonts: Space Grotesk (display) + Inter (sans) via `next/font/google`. CSS scope-uit pe `(frontend)` ca să nu spargă admin Payload. Helpers `cn()` + constants (SITE_URL, NAV_ITEMS, FOOTER_COLUMNS, CONTACT).
+- **Faza 2.2**: Componente core în `src/components/`: `ui/{Button,Container,Eyebrow,Section}`, `layout/{Header,HeaderMobileMenu,Footer}`, `marketing/{Hero,ServiceCard,PackageCard,TestimonialCard,StatsStrip,CTABlock,JsonLd,PostCard}`, `forms/ContactForm` (Client Component cu Zod + Server Action).
+- **Faza 2.3**: SEO group field (`src/fields/seo.ts`) și 8 blocuri flexibile (`src/blocks/{Hero,RichText,ServicesGrid,Packages,GalleryStrip,Testimonials,FAQ,CTA}`) atașate pe Pages, Posts, Services. Posts au `status` (draft/published), `category`, `tags`. Services au `eyebrow`, `heroImage`, `relatedPackages`, `schema` custom JSON-LD textarea.
+- **Faza 2.4**: Homepage refăcută în `src/app/(frontend)/page.tsx` — Server Component, fetch real prin Payload Local API (services, packages, testimonials, galleries, posts) cu fallback în-cod, ISR 1h, JSON-LD LocalBusiness, ContactForm compact integrat.
 
 ## Faza 1 — ce s-a livrat
 
