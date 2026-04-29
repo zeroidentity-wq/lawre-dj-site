@@ -11,9 +11,9 @@ const INITIAL: SubmitState = { ok: false }
 const inputBase =
   'w-full bg-ink-soft border rounded-md px-4 py-3 text-bone text-sm placeholder:text-bone-dim focus:outline-none focus:border-neon-500/60 transition-colors'
 
-type Props = { variant?: 'compact' | 'full' }
+type Props = { variant?: 'compact' | 'full'; defaultEventType?: string }
 
-export function ContactForm({ variant = 'compact' }: Props) {
+export function ContactForm({ variant = 'compact', defaultEventType }: Props) {
   const [state, formAction] = useActionState(submitContact, INITIAL)
   const showFull = variant === 'full'
 
@@ -36,7 +36,7 @@ export function ContactForm({ variant = 'compact' }: Props) {
         <Field label="Telefon" name="phone" type="tel" error={err.phone} />
       </div>
       <div className="grid gap-4 md:grid-cols-2">
-        <SelectField label="Tip eveniment" name="eventType" required error={err.eventType} />
+        <SelectField label="Tip eveniment" name="eventType" required error={err.eventType} defaultValue={defaultEventType} />
         {showFull && <Field label="Data evenimentului" name="eventDate" type="date" error={err.eventDate} />}
       </div>
       {showFull && (
@@ -103,7 +103,7 @@ function Field({ label, name, type = 'text', required, error }: FieldProps) {
   )
 }
 
-function SelectField({ label, name, required, error }: FieldProps) {
+function SelectField({ label, name, required, error, defaultValue }: FieldProps & { defaultValue?: string }) {
   return (
     <div>
       <label htmlFor={name} className="block text-xs uppercase tracking-[0.08em] text-bone-muted mb-2">
@@ -114,7 +114,7 @@ function SelectField({ label, name, required, error }: FieldProps) {
         id={name}
         name={name}
         required={required}
-        defaultValue=""
+        defaultValue={defaultValue ?? ''}
         aria-invalid={Boolean(error)}
         className={cn(inputBase, error ? 'border-red-500/60' : 'border-hairline')}
       >
