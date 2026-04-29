@@ -1,0 +1,10 @@
+  ▎ Continuă proiectul Lawre DJ. Status: Faze 2.1–2.4 done, pushed pe origin/master. Citește CLAUDE.md și PROGRESS.md pentru context. Pornește Faza 2.5 (pagina pilon
+  ▎ /servicii/dj-nunta-bucuresti) — folosește conținutul din lawre-package/dj-nunta-bucuresti.md și creează un seed script ca să populezi Service-ul în Payload fără
+  ▎ click în admin. Plan mode înainte de cod.
+
+  Continuă proiectul Lawre DJ. Citește PROGRESS.md pentru status (Faza 2.5 done, push-ed pe origin/master). Pornește Faza 2.6: extinde scripts/seed-dj-nunta.ts într-un
+   scripts/seed-services.ts care populează cele 7 servicii rămase (DJ Botez, Cununie Civilă, Majorat, Corporate, Club/Rezidență, Petrecere Privată, Sonorizare
+  Evenimente) cu conținut minim viabil — hero, featureGrid 3-4 items, processSteps 3 pași, packages block, FAQ 5 întrebări, CTA. Refolosește patternul din
+  seed-dj-nunta.ts și componentele existente — fără explorare extinsă. Generezi tu textele în RO, SEO-friendly pe keywords-urile Tier 2 din CLAUDE.md. Plan mode
+  înainte de cod.
+

@@ -42,9 +42,6 @@ next-env.d.ts
 
 /media
 
-# Local scratchpad / session notes — never track
-/lawre-package/
-
 # Playwright
 node_modules/
 /test-results/
