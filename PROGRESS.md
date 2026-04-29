@@ -4,8 +4,19 @@
 
 ## Status la zi
 
-**Faza curentă:** Faza 2.6 — DONE (2026-04-29).
-**Faza următoare:** Faza 2.7 — pagini statice rămase (Despre, Pachete, Galerie, Blog listing/single, Zone-deservite, Testimoniale, Contact, Cerere ofertă).
+**Faza curentă:** Faza 2.7 — DONE (2026-04-29).
+**Faza următoare:** Faza 2.8 — pagini suport (Despre, Pachete listing+single, Contact, Cerere ofertă, Galerie, Echipament).
+
+## Faza 2.7 — ce s-a livrat (2026-04-29)
+
+- **`src/app/(frontend)/blog/page.tsx`** — listing posts published, grid 3col cu PostCard, ISR 1h, generateMetadata.
+- **`src/app/(frontend)/blog/[slug]/page.tsx`** — single post: generateStaticParams, generateMetadata, article header (breadcrumbs + eyebrow categorie + H1 + excerpt + read time estimat), RichText cu `prose prose-invert` + override neon links, related articles, JSON-LD Article + BreadcrumbList, ISR 1h.
+- **`scripts/seed-blog.ts`** (pnpm seed:blog) — 3 articole seed-uite cu conținut real complet din `lawre-package/0{1,2,3}-*.md`: cat-costa-un-dj, top-melodii, 10-intrebari. Idempotent ✓.
+- **`src/lib/lexical.ts`** — adăugat `ol()`, `h4()`, `pBold()` helpers.
+- **`src/lib/schema.ts`** — adăugat `buildArticleSchema()` (Article JSON-LD).
+- **`src/components/ui/Container.tsx`** — adăugat `size="narrow"` prop (max-w-3xl pentru layout articole).
+- **`package.json`** — script `seed:blog` adăugat.
+- **`pnpm exec tsc --noEmit`** → zero erori ✓. Seed idempotent ✓.
 
 ## Faza 2.6 — ce s-a livrat (2026-04-29)
 

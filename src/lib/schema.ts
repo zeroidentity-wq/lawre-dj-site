@@ -44,6 +44,35 @@ export function findFaqBlock(layout: Service['layout']): FaqBlock | null {
   return block ?? null
 }
 
+export function buildArticleSchema(post: {
+  title: string
+  slug: string
+  excerpt?: string | null
+  publishedAt?: string | null
+  updatedAt: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    ...(post.excerpt ? { description: post.excerpt } : {}),
+    url: `${SITE_URL}/blog/${post.slug}`,
+    datePublished: post.publishedAt ?? post.updatedAt,
+    dateModified: post.updatedAt,
+    author: {
+      '@type': 'Person',
+      name: 'Lawre DJ',
+      url: `${SITE_URL}/despre`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
+    },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${post.slug}` },
+  }
+}
+
 export function buildServiceSchema(service: Service): object {
   if (service.schema) {
     try {

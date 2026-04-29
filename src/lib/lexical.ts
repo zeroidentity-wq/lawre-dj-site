@@ -131,3 +131,15 @@ export function h3(text: string): LexNode {
 export function ul(items: string[]): LexNode {
   return listNode('bullet', items)
 }
+
+export function ol(items: string[]): LexNode {
+  return listNode('number', items)
+}
+
+export function h4(text: string): LexNode {
+  return headingNode(4, text)
+}
+
+export function pBold(text: string): LexNode {
+  return paragraphNode([textNode(text, 1)])
+}
