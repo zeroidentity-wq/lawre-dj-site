@@ -3,6 +3,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 
 import { SITE_URL } from '@/lib/constants'
+import { ZONES } from '@/lib/zone-deservite'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const payload = await getPayload({ config })
@@ -30,7 +31,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/despre`, lastModified: now, changeFrequency: 'yearly', priority: 0.5 },
     { url: `${SITE_URL}/echipament`, lastModified: now, changeFrequency: 'yearly', priority: 0.4 },
     { url: `${SITE_URL}/contact`, lastModified: now, changeFrequency: 'yearly', priority: 0.5 },
+    { url: `${SITE_URL}/cerere-oferta`, lastModified: now, changeFrequency: 'yearly', priority: 0.6 },
+    { url: `${SITE_URL}/testimoniale`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${SITE_URL}/club-dates`, lastModified: now, changeFrequency: 'weekly', priority: 0.5 },
   ]
+
+  const zonePages: MetadataRoute.Sitemap = ZONES.map((z) => ({
+    url: `${SITE_URL}/zone-deservite/${z.slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.5,
+  }))
 
   const servicePages: MetadataRoute.Sitemap = servicesRes.docs
     .filter((s) => s.slug !== 'dj-nunta-bucuresti')
@@ -55,5 +66,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
-  return [...staticPages, ...servicePages, ...postPages, ...packagePages]
+  return [...staticPages, ...servicePages, ...postPages, ...packagePages, ...zonePages]
 }

@@ -1,10 +1,24 @@
 import type { CollectionConfig } from 'payload'
 import { seo } from '@/fields/seo'
+import { revalidateForCollection } from '@/lib/revalidate'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
   admin: { useAsTitle: 'title', defaultColumns: ['title', 'category', 'status', 'publishedAt'] },
   access: { read: () => true },
+  hooks: {
+    afterChange: [
+      async ({ doc, previousDoc }) => {
+        await revalidateForCollection('posts', doc, previousDoc)
+        return doc
+      },
+    ],
+    afterDelete: [
+      async ({ doc }) => {
+        await revalidateForCollection('posts', doc)
+      },
+    ],
+  },
   fields: [
     { name: 'title', type: 'text', required: true },
     { name: 'slug', type: 'text', required: true, unique: true, index: true },

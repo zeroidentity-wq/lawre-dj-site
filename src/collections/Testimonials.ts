@@ -1,9 +1,23 @@
 import type { CollectionConfig } from 'payload'
+import { revalidateForCollection } from '@/lib/revalidate'
 
 export const Testimonials: CollectionConfig = {
   slug: 'testimonials',
   admin: { useAsTitle: 'clientName' },
   access: { read: () => true },
+  hooks: {
+    afterChange: [
+      async ({ doc, previousDoc }) => {
+        await revalidateForCollection('testimonials', doc, previousDoc)
+        return doc
+      },
+    ],
+    afterDelete: [
+      async ({ doc }) => {
+        await revalidateForCollection('testimonials', doc)
+      },
+    ],
+  },
   fields: [
     { name: 'clientName', type: 'text', required: true },
     { name: 'eventType', type: 'text' },

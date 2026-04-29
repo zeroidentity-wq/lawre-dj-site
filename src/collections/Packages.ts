@@ -1,9 +1,23 @@
 import type { CollectionConfig } from 'payload'
+import { revalidateForCollection } from '@/lib/revalidate'
 
 export const Packages: CollectionConfig = {
   slug: 'packages',
   admin: { useAsTitle: 'name', defaultColumns: ['name', 'price'] },
   access: { read: () => true },
+  hooks: {
+    afterChange: [
+      async ({ doc, previousDoc }) => {
+        await revalidateForCollection('packages', doc, previousDoc)
+        return doc
+      },
+    ],
+    afterDelete: [
+      async ({ doc }) => {
+        await revalidateForCollection('packages', doc)
+      },
+    ],
+  },
   fields: [
     { name: 'name', type: 'text', required: true },
     { name: 'slug', type: 'text', required: true, unique: true, index: true },

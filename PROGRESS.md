@@ -4,8 +4,39 @@
 
 ## Status la zi
 
-**Faza curentă:** Faza 2.7 — DONE (2026-04-29).
-**Faza următoare:** Faza 2.8 — pagini suport (Despre, Pachete listing+single, Contact, Cerere ofertă, Galerie, Echipament).
+**Faza curentă:** Faza 2 — DONE (până la sub-faza 2.12, 2026-04-29). Plus fix on-demand revalidation post-admin.
+**Faza următoare:** Faza 3 — conținut SEO (texte 2000+ cuvinte pe pillar pages, 5+ articole blog, galerie reală, testimoniale reale).
+
+## Fix (2026-04-29) — on-demand revalidation după save în admin + sitemap completion
+
+- **`src/lib/revalidate.ts`** (nou) — helper `revalidateForCollection(slug, doc, prev?)` și `revalidateForGlobal(slug)`. Dynamic import de `next/cache` cu try/catch ⇒ no-op safe în scripturile de seed.
+- **Hooks `afterChange` + `afterDelete`** adăugate pe collections care alimentează rute publice: `Pages`, `Posts`, `Services`, `Packages`, `Galleries`, `Mixes`, `Testimonials`, `ClubDates`, `Equipment`. Mapate la rutele relevante (`/`, `/blog`, `/blog/[slug]`, `/servicii/[slug]`, `/pachete/[slug]`, etc.). Tratăm și redenumirile de slug (invalidăm și `previousDoc.slug`).
+- **Hooks `afterChange`** pe globals `SiteSettings`, `Menu`, `Footer` ⇒ `revalidatePath('/', 'layout')` (afectează header/footer pe tot site-ul).
+- **Sitemap completat**: adăugate `/cerere-oferta`, `/testimoniale`, `/club-dates`, plus toate `/zone-deservite/[slug]` (12 pagini) din `ZONES`.
+- **Verificare:** `pnpm exec tsc --noEmit` → zero erori. Salvarea în /admin (Post/Service/Package/Gallery/Mix/Testimonial/ClubDate/Equipment/Pages/SiteSettings/Menu/Footer) re-renderizează imediat paginile aferente, fără să mai aștepți expirarea ISR de 1h.
+
+## Faza 2.12 — pagini hiperlocale `/zone-deservite/*` (2026-04-29) — commit `e79fc77`
+
+- 12 pagini generate static prin route dinamic `/zone-deservite/[slug]` (sectoarele 1-6 + Otopeni, Voluntari, Popești-Leordeni, Pantelimon, Bragadiru, Chitila).
+- Date în `src/lib/zone-deservite.ts` (`ZONES`, `ZONE_MAP`, `buildZoneUrl`).
+- Conținut hyperlocal pe keyword Tier 4 (ex: "DJ nuntă Sector 1 București"), `generateStaticParams` + `generateMetadata` per slug.
+
+## Faza 2.11 — testimoniale + club-dates (2026-04-29) — commit `bc5f7d5`
+
+- `/testimoniale` listing complet (filter pe eventType).
+- `/club-dates` calendar live al evenimentelor de club.
+
+## Faza 2.10 — despre, galerie, echipament, mixuri (2026-04-29) — commit `4898182`
+
+- `/despre`, `/echipament` (grupat pe categorii), `/galerie` (filter category), `/mixuri` (embed-uri SoundCloud/Mixcloud/YouTube).
+
+## Faza 2.9 — SEO tehnic (2026-04-29) — commit `bd04ecb`
+
+- `src/app/sitemap.ts` (dinamic, fetch din Payload), `src/app/robots.ts`, OG image default, GA4 + Vercel Analytics.
+
+## Faza 2.8 — pagini suport (2026-04-29) — commit `7a4deb6`
+
+- `/contact`, `/cerere-oferta` (form detaliat), `/pachete` listing + `/pachete/[slug]` single.
 
 ## Faza 2.7 — ce s-a livrat (2026-04-29)
 

@@ -1,8 +1,17 @@
 import type { GlobalConfig } from 'payload'
+import { revalidateForGlobal } from '@/lib/revalidate'
 
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
   access: { read: () => true },
+  hooks: {
+    afterChange: [
+      async ({ doc }) => {
+        await revalidateForGlobal('site-settings')
+        return doc
+      },
+    ],
+  },
   fields: [
     { name: 'siteName', type: 'text', defaultValue: 'Lawre DJ' },
     { name: 'tagline', type: 'text' },
