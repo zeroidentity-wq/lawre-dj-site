@@ -4,8 +4,22 @@
 
 ## Status la zi
 
-**Faza curentă:** Faza 2.5 — DONE (2026-04-28).
-**Faza următoare:** Faza 2.6 — restul paginilor de servicii (același template, conținut minim viabil).
+**Faza curentă:** Faza 2.6 — DONE (2026-04-29).
+**Faza următoare:** Faza 2.7 — pagini statice rămase (Despre, Pachete, Galerie, Blog listing/single, Zone-deservite, Testimoniale, Contact, Cerere ofertă).
+
+## Faza 2.6 — ce s-a livrat (2026-04-29)
+
+- **Seed script** `scripts/seed-services.ts` (rulat cu `pnpm seed:services`) — idempotent, populează cele 7 servicii rămase:
+  - `dj-botez-bucuresti`, `dj-cununie-civila`, `dj-majorat-bucuresti`, `dj-corporate-bucuresti`, `dj-club-rezidenta`, `dj-petrecere-privata`, `sonorizare-evenimente`
+- Fiecare serviciu conține 8 blocuri (richText intro, featureGrid 3-4 items, processSteps 3 pași, richText pachete, packages, faq 5 Q&A, testimonials, cta).
+- Texte RO generate, SEO-friendly pe keywords Tier 2 din CLAUDE.md.
+- `package.json` — script `seed:services` adăugat.
+- `ServiceData` type explicit definit (evită union-ul prea larg din Payload generics).
+- `pnpm exec tsc --noEmit` → zero erori. A doua rulare → 7× `updated` (idempotent ✓).
+
+**Verificare end-to-end:**
+- `pnpm seed:services` → 7 created, idempotent la a doua rulare ✓
+- `GET /servicii/dj-botez-bucuresti`, `/servicii/dj-club-rezidenta` etc. → disponibile via route-ul dinamic existent (Faza 2.5)
 
 ## Faza 2.5 — ce s-a livrat (2026-04-28)
 
