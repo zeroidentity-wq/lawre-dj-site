@@ -44,12 +44,21 @@ const BARS = [
 ]
 
 // Sine waveform path: 10 periods × 34px = 340px (seamlessly loops at 170px = half)
+// viewBox height 32 — used on desktop
 const SINE_PATH =
   'M0,16 Q8.5,4 17,16 Q25.5,28 34,16 Q42.5,4 51,16 Q59.5,28 68,16 ' +
   'Q76.5,4 85,16 Q93.5,28 102,16 Q110.5,4 119,16 Q127.5,28 136,16 ' +
   'Q144.5,4 153,16 Q161.5,28 170,16 Q178.5,4 187,16 Q195.5,28 204,16 ' +
   'Q212.5,4 221,16 Q229.5,28 238,16 Q246.5,4 255,16 Q263.5,28 272,16 ' +
   'Q280.5,4 289,16 Q297.5,28 306,16 Q314.5,4 323,16 Q331.5,28 340,16'
+
+// Same wave scaled for viewBox height 24 — used on mobile
+const SINE_PATH_MOBILE =
+  'M0,12 Q8.5,3 17,12 Q25.5,21 34,12 Q42.5,3 51,12 Q59.5,21 68,12 ' +
+  'Q76.5,3 85,12 Q93.5,21 102,12 Q110.5,3 119,12 Q127.5,21 136,12 ' +
+  'Q144.5,3 153,12 Q161.5,21 170,12 Q178.5,3 187,12 Q195.5,21 204,12 ' +
+  'Q212.5,3 221,12 Q229.5,21 238,12 Q246.5,3 255,12 Q263.5,21 272,12 ' +
+  'Q280.5,3 289,12 Q297.5,21 306,12 Q314.5,3 323,12 Q331.5,21 340,12'
 
 export function HeroRotating({
   variants,
@@ -142,6 +151,79 @@ export function HeroRotating({
         <p className="mt-10 text-sm text-bone-dim">
           800+ evenimente · 8 ani în industrie · 5.0★ pe Google
         </p>
+
+        {/* Mobile / tablet visualizer — shown below content on small screens */}
+        <div className="lg:hidden mt-8">
+          <div
+            className="overflow-hidden flex justify-center"
+            style={{
+              height: '72px',
+              maskImage:
+                'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',
+              WebkitMaskImage:
+                'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',
+            }}
+          >
+            <div className="flex gap-[2px] items-end shrink-0" style={{ height: '72px' }}>
+              {[...BARS, ...BARS].map((bar, i) => (
+                <span
+                  key={i}
+                  className="waveform-bar block rounded-[2px] shrink-0"
+                  style={{
+                    width: '4px',
+                    height: `${bar.h}%`,
+                    background:
+                      bar.h >= 80
+                        ? 'linear-gradient(to top, #a21caf, #f0abfc)'
+                        : 'linear-gradient(to top, #c026d3, #e879f9)',
+                    transformOrigin: 'bottom',
+                    boxShadow:
+                      bar.h >= 80
+                        ? '0 0 8px 2px rgba(217,70,239,0.5)'
+                        : '0 0 3px 1px rgba(217,70,239,0.2)',
+                    animation: `waveBar ${bar.dur}s ease-in-out ${((i * 0.029) % 1.4).toFixed(3)}s infinite`,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div
+            className="waveform-sine mt-1 overflow-hidden opacity-40"
+            style={{
+              height: '24px',
+              maskImage:
+                'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
+              WebkitMaskImage:
+                'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
+            }}
+          >
+            <svg
+              width="200%"
+              height="24"
+              viewBox="0 0 340 24"
+              preserveAspectRatio="none"
+              style={{ display: 'block', animation: 'waveSineScroll 3.8s linear infinite' }}
+            >
+              <path
+                d={SINE_PATH_MOBILE}
+                stroke="#d946ef"
+                strokeWidth="1.5"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d={SINE_PATH_MOBILE}
+                stroke="#e879f9"
+                strokeWidth="3"
+                fill="none"
+                strokeLinecap="round"
+                opacity="0.25"
+              />
+            </svg>
+          </div>
+        </div>
       </div>
 
       <div className="absolute right-12 top-24 hidden lg:flex flex-col items-stretch gap-2 pointer-events-none select-none">
