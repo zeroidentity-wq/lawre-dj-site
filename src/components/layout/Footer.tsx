@@ -35,9 +35,14 @@ export function Footer() {
                 href={CONTACT.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-bone transition-colors"
+                className="inline-flex items-center gap-1.5 text-neon-400 hover:text-neon-300 transition-colors"
               >
-                Instagram
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                  <circle cx="12" cy="12" r="4"/>
+                  <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+                </svg>
+                @lawre_dj
               </a>
             </li>
             {LEGAL_LINKS.map((link) => (
@@ -56,7 +61,27 @@ export function Footer() {
 
 function FooterLink({ href, label }: { href: string; label: string }) {
   const isExternal = href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')
+  const isInstagram = href.includes('instagram.com')
   const className = 'text-sm text-bone-muted hover:text-bone transition-colors'
+
+  if (isInstagram) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1.5 text-sm text-neon-400 hover:text-neon-300 transition-colors"
+      >
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+        </svg>
+        {label}
+      </a>
+    )
+  }
+
   if (isExternal) {
     return (
       <a href={href} className={className} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}>

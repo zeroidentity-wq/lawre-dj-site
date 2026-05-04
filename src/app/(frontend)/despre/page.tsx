@@ -136,8 +136,13 @@ export default async function DesprePage() {
                   href={CONTACT.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 border border-hairline hover:border-neon-500/40 text-bone-muted hover:text-bone px-5 py-2.5 rounded-md text-sm transition-colors"
+                  className="inline-flex items-center gap-2 border border-neon-500/40 hover:border-neon-400 hover:bg-neon-500/10 text-neon-400 px-5 py-2.5 rounded-md text-sm font-medium transition-colors"
                 >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                    <circle cx="12" cy="12" r="4"/>
+                    <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+                  </svg>
                   {CONTACT.instagramHandle}
                 </a>
               </div>

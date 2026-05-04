@@ -448,7 +448,7 @@ export default async function HomePage() {
         <header className="max-w-2xl">
           <Eyebrow>Ce spun clienții</Eyebrow>
           <h2 className="mt-4 font-display text-3xl md:text-5xl font-medium tracking-[-0.015em]">
-            300+ evenimente. Niciun client nedorit acasă.
+            800+ evenimente. Niciun client nedorit acasă.
           </h2>
         </header>
         <div className="mt-12 grid gap-6 md:grid-cols-3">

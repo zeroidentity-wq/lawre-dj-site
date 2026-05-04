@@ -24,7 +24,7 @@ export function Hero() {
             </Button>
           </div>
           <p className="mt-10 text-sm text-bone-dim">
-            300+ evenimente · 8 ani în industrie · 5.0★ pe Google
+            800+ evenimente · 8 ani în industrie · 5.0★ pe Google
           </p>
         </div>
       </Container>

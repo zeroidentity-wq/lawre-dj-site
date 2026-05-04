@@ -1,7 +1,7 @@
 type Stat = { value: string; label: string }
 
 const DEFAULT_STATS: Stat[] = [
-  { value: '300+', label: 'evenimente' },
+  { value: '800+', label: 'evenimente' },
   { value: '8 ani', label: 'în industrie' },
   { value: '5.0★', label: 'pe Google' },
 ]

@@ -110,9 +110,13 @@ export default async function CerereOfertaPage({
                   href={CONTACT.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-sm text-bone-muted hover:text-neon-300 transition-colors"
+                  className="flex items-center gap-3 text-sm text-neon-400 hover:text-neon-300 transition-colors"
                 >
-                  <span className="text-neon-400">@</span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                    <circle cx="12" cy="12" r="4"/>
+                    <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+                  </svg>
                   {CONTACT.instagramHandle}
                 </a>
                 <p className="text-xs text-bone-dim pt-2 border-t border-hairline">

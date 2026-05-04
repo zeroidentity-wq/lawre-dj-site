@@ -95,7 +95,7 @@ export default async function MixuriPage() {
                   rel="noopener noreferrer"
                   className="text-neon-300 hover:text-neon-200 transition-colors"
                 >
-                  Instagram
+                  @lawre_dj
                 </a>{' '}
                 între timp.
               </p>
