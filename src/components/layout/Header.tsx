@@ -42,7 +42,7 @@ export function Header() {
             @lawre_dj
           </a>
           <Button
-            href="https://wa.me/40700000000"
+            href="https://wa.me/40764443356"
             variant="ghost"
             size="sm"
             className="text-neon-400 border border-neon-500/40 hover:border-neon-400 hover:bg-neon-500/10"

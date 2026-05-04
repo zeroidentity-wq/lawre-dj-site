@@ -282,31 +282,42 @@ export default async function HomePage() {
 
       {/* About teaser */}
       <Section>
-        <div className="max-w-3xl">
-          <Eyebrow>Cine e Lawre</Eyebrow>
-          <h2 className="mt-4 font-display text-3xl md:text-5xl font-medium tracking-[-0.015em]">
-            Un DJ care simte ringul.
-          </h2>
-          <div className="mt-6 space-y-4 text-bone-muted text-base md:text-lg leading-relaxed">
-            <p>
-              Lawre nu e doar „tipul cu boxele". E DJ-ul care citește energia camerei și știe
-              exact ce piesă urmează — fie că e primul dans la o nuntă, un teambuilding corporate sau
-              o noapte la club.
-            </p>
-            <p>
-              Activ pe scena privată și de club din București de peste 8 ani, Lawre vine cu
-              echipament profesional propriu, prezență scenică matură și un repertoriu care merge
-              de la house și deep cuts la hituri românești și internaționale, în funcție de ce
-              cere publicul.
-            </p>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-10 lg:gap-16 items-center">
+          <div>
+            <Eyebrow>Cine e Lawre</Eyebrow>
+            <h2 className="mt-4 font-display text-3xl md:text-5xl font-medium tracking-[-0.015em]">
+              Un DJ care simte ringul.
+            </h2>
+            <div className="mt-6 space-y-4 text-bone-muted text-base md:text-lg leading-relaxed">
+              <p>
+                Lawre nu e doar „tipul cu boxele". E DJ-ul care citește energia camerei și știe
+                exact ce piesă urmează — fie că e primul dans la o nuntă, un teambuilding corporate sau
+                o noapte la club.
+              </p>
+              <p>
+                Activ pe scena privată și de club din București de peste 8 ani, Lawre vine cu
+                echipament profesional propriu, prezență scenică matură și un repertoriu care merge
+                de la house și deep cuts la hituri românești și internaționale, în funcție de ce
+                cere publicul.
+              </p>
+            </div>
+            <Link
+              href="/despre"
+              className="mt-8 inline-flex items-center gap-1 text-neon-300 hover:text-neon-200 transition-colors"
+            >
+              Citește povestea completă
+              <span aria-hidden>→</span>
+            </Link>
           </div>
-          <Link
-            href="/despre"
-            className="mt-8 inline-flex items-center gap-1 text-neon-300 hover:text-neon-200 transition-colors"
-          >
-            Citește povestea completă
-            <span aria-hidden>→</span>
-          </Link>
+          <div className="relative w-full max-w-[340px] mx-auto lg:mx-0 aspect-[3/4] rounded-xl overflow-hidden order-first lg:order-last">
+            <Image
+              src="/images/lawre-dj-portrait.png"
+              alt="Lawre DJ"
+              fill
+              sizes="(max-width: 1024px) 90vw, 340px"
+              className="object-cover object-top"
+            />
+          </div>
         </div>
       </Section>
 
@@ -526,7 +537,7 @@ export default async function HomePage() {
         primaryLabel="Cere ofertă personalizată →"
         primaryHref="/cerere-oferta"
         secondaryLabel="Scrie pe WhatsApp"
-        secondaryHref="https://wa.me/40700000000"
+        secondaryHref="https://wa.me/40764443356"
       />
 
       <Section>

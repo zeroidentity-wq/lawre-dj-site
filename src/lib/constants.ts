@@ -9,6 +9,7 @@ export const SITE_DESCRIPTION =
   'DJ profesionist din București pentru nunți, botezuri, corporate, club și petreceri private. Echipament propriu, mixuri live, pachete personalizate. Cere ofertă.'
 
 export const NAV_ITEMS = [
+  { label: 'Despre', href: '/despre' },
   { label: 'Servicii', href: '/servicii/dj-nunta-bucuresti' },
   { label: 'Pachete', href: '/pachete' },
   { label: 'Galerie', href: '/galerie' },
@@ -19,7 +20,8 @@ export const NAV_ITEMS = [
 
 export const CONTACT = {
   email: 'contact@lawredj.ro',
-  phone: '07XX XXX XXX',
+  phone: '0764 443 356',
+  whatsapp: 'https://wa.me/40764443356',
   area: 'București + Ilfov',
   instagram: 'https://www.instagram.com/lawre_dj/',
   instagramHandle: '@lawre_dj',

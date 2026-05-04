@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { getPayload } from 'payload'
 import config from '@payload-config'
@@ -24,8 +25,8 @@ export const metadata: Metadata = {
 }
 
 const STATS = [
-  { value: '5+', label: 'ani experiență' },
-  { value: '200+', label: 'evenimente' },
+  { value: '8 ani', label: 'experiență' },
+  { value: '800+', label: 'evenimente' },
   { value: '8', label: 'servicii acoperite' },
   { value: '24h', label: 'timp răspuns' },
 ]
@@ -79,15 +80,29 @@ export default async function DesprePage() {
       {/* Hero */}
       <Section className="pt-24 pb-12 border-b border-hairline">
         <Container>
-          <p className="text-xs uppercase tracking-[0.12em] text-neon-400 font-medium mb-4">
-            Despre
-          </p>
-          <h1 className="font-display text-4xl md:text-5xl font-semibold tracking-tight text-bone max-w-2xl">
-            Bine ai venit. Sunt Lawre.
-          </h1>
-          <p className="mt-4 text-base text-bone-muted max-w-xl leading-relaxed">
-            DJ profesionist din București, activ pe scena de club și la evenimente private de peste 5 ani. Nu sunt un "wedding DJ" generic — vin din club, știu ce înseamnă o noapte care funcționează cu adevărat.
-          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-10 lg:gap-16 items-center">
+            <div>
+              <p className="text-xs uppercase tracking-[0.12em] text-neon-400 font-medium mb-4">
+                Despre
+              </p>
+              <h1 className="font-display text-4xl md:text-5xl font-semibold tracking-tight text-bone max-w-2xl">
+                Bine ai venit. Sunt Lawre.
+              </h1>
+              <p className="mt-4 text-base text-bone-muted max-w-xl leading-relaxed">
+                DJ profesionist din București, activ pe scena de club și la evenimente private de peste 5 ani. Nu sunt un "wedding DJ" generic — vin din club, știu ce înseamnă o noapte care funcționează cu adevărat.
+              </p>
+            </div>
+            <div className="relative w-full max-w-[380px] mx-auto lg:mx-0 aspect-[3/4] rounded-xl overflow-hidden">
+              <Image
+                src="/images/lawre-dj-portrait.png"
+                alt="Lawre DJ — portret"
+                fill
+                sizes="(max-width: 1024px) 90vw, 380px"
+                className="object-cover object-top"
+                priority
+              />
+            </div>
+          </div>
         </Container>
       </Section>
 
