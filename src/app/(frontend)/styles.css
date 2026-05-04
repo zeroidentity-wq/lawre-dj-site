@@ -39,15 +39,32 @@
     }
   }
 
-  @keyframes waveformPulse {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
+  @keyframes waveBar {
+    0%, 100% {
+      transform: scaleY(0.08);
+      opacity: 0.2;
+    }
+    45%, 55% {
+      transform: scaleY(1);
+      opacity: 0.95;
+    }
+  }
+
+  @keyframes waveSineScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .hero-eyebrow-anim,
     .hero-variant-anim {
       animation: none;
+    }
+    .waveform-bar,
+    .waveform-sine {
+      animation: none !important;
+      transform: scaleY(1) !important;
+      opacity: 0.5 !important;
     }
   }
 }
