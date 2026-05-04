@@ -55,6 +55,18 @@
     to   { transform: translateX(-50%); }
   }
 
+  .waveform-divider-sweep {
+    animation: dividerSweep 9s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+
+  @keyframes dividerSweep {
+    0%   { transform: translateX(-100%); opacity: 0; }
+    8%   { opacity: 1; }
+    92%  { opacity: 1; }
+    100% { transform: translateX(360%); opacity: 0; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero-eyebrow-anim,
     .hero-variant-anim {
@@ -65,6 +77,10 @@
       animation: none !important;
       transform: scaleY(1) !important;
       opacity: 0.5 !important;
+    }
+    .waveform-divider-sweep {
+      animation: none !important;
+      opacity: 0 !important;
     }
   }
 }

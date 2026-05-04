@@ -322,7 +322,7 @@ export default async function HomePage() {
       </Section>
 
       {/* Services */}
-      <Section className="border-t border-hairline">
+      <Section divider dividerDelay={0.4}>
         <header className="max-w-2xl">
           <Eyebrow>Servicii</Eyebrow>
           <h2 className="mt-4 font-display text-3xl md:text-5xl font-medium tracking-[-0.015em]">
@@ -361,7 +361,7 @@ export default async function HomePage() {
       </Section>
 
       {/* Packages */}
-      <Section className="border-t border-hairline">
+      <Section divider dividerDelay={1.7}>
         <header className="max-w-2xl">
           <Eyebrow>Pachete</Eyebrow>
           <h2 className="mt-4 font-display text-3xl md:text-5xl font-medium tracking-[-0.015em]">
@@ -391,7 +391,7 @@ export default async function HomePage() {
 
       {/* Galerie strip — only when CMS has data */}
       {galleries.length > 0 && (
-        <Section className="border-t border-hairline">
+        <Section divider dividerDelay={2.9}>
           <header className="max-w-2xl flex flex-wrap items-end justify-between gap-4">
             <div>
               <Eyebrow>Galerie</Eyebrow>
@@ -432,7 +432,7 @@ export default async function HomePage() {
       )}
 
       {/* Why Lawre */}
-      <Section className="border-t border-hairline">
+      <Section divider dividerDelay={3.6}>
         <header className="max-w-2xl">
           <Eyebrow>De ce Lawre</Eyebrow>
           <h2 className="mt-4 font-display text-3xl md:text-5xl font-medium tracking-[-0.015em]">
@@ -455,7 +455,7 @@ export default async function HomePage() {
       </Section>
 
       {/* Testimonials */}
-      <Section className="border-t border-hairline">
+      <Section divider dividerDelay={0.9}>
         <header className="max-w-2xl">
           <Eyebrow>Ce spun clienții</Eyebrow>
           <h2 className="mt-4 font-display text-3xl md:text-5xl font-medium tracking-[-0.015em]">
@@ -477,7 +477,7 @@ export default async function HomePage() {
       </Section>
 
       {/* Equipment teaser */}
-      <Section className="border-t border-hairline">
+      <Section divider dividerDelay={2.3}>
         <div className="max-w-3xl">
           <Eyebrow>Echipament</Eyebrow>
           <h2 className="mt-4 font-display text-3xl md:text-5xl font-medium tracking-[-0.015em]">
@@ -500,7 +500,7 @@ export default async function HomePage() {
 
       {/* Blog teaser — only when there are published posts */}
       {posts.length > 0 && (
-        <Section className="border-t border-hairline">
+        <Section divider dividerDelay={4.1}>
           <header className="max-w-2xl flex flex-wrap items-end justify-between gap-4">
             <div>
               <Eyebrow>Blog</Eyebrow>

@@ -1,3 +1,5 @@
+import { WaveformDivider } from '@/components/ui/WaveformDivider'
+
 type Stat = { value: string; label: string }
 
 const DEFAULT_STATS: Stat[] = [
@@ -8,7 +10,8 @@ const DEFAULT_STATS: Stat[] = [
 
 export function StatsStrip({ stats = DEFAULT_STATS }: { stats?: Stat[] }) {
   return (
-    <div className="border-y border-hairline">
+    <div>
+      <WaveformDivider delay={0} />
       <dl className="grid grid-cols-3 divide-x divide-hairline">
         {stats.map((s) => (
           <div key={s.label} className="px-4 py-8 md:py-10 text-center">
@@ -22,6 +25,7 @@ export function StatsStrip({ stats = DEFAULT_STATS }: { stats?: Stat[] }) {
           </div>
         ))}
       </dl>
+      <WaveformDivider delay={1.5} />
     </div>
   )
 }

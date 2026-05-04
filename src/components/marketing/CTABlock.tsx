@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
+import { WaveformDivider } from '@/components/ui/WaveformDivider'
 
 type Props = {
   heading: string
@@ -19,7 +20,9 @@ export function CTABlock({
   secondaryHref,
 }: Props) {
   return (
-    <section className="border-y border-hairline bg-ink-soft py-20 md:py-28">
+    <section className="relative bg-ink-soft py-20 md:py-28">
+      <WaveformDivider className="absolute top-0 left-0 right-0" delay={2.2} />
+      <WaveformDivider className="absolute bottom-0 left-0 right-0" delay={3.4} />
       <Container>
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-display text-3xl md:text-5xl font-medium tracking-[-0.015em]">
