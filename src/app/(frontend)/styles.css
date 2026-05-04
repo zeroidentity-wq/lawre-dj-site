@@ -60,6 +60,22 @@
     will-change: transform, opacity;
   }
 
+  /* 120 BPM beat pulse on stat numbers */
+  .stats-beat {
+    animation: beatPulse 0.5s linear infinite;
+  }
+
+  @keyframes beatPulse {
+    0%, 38%  { text-shadow: none; }
+    50%      {
+      text-shadow:
+        0 0 10px rgba(217, 70, 239, 0.9),
+        0 0 24px rgba(217, 70, 239, 0.5),
+        0 0 52px rgba(217, 70, 239, 0.2);
+    }
+    62%, 100% { text-shadow: none; }
+  }
+
   @keyframes dividerSweep {
     0%   { transform: translateX(-100%); opacity: 0; }
     8%   { opacity: 1; }
@@ -81,6 +97,10 @@
     .waveform-divider-sweep {
       animation: none !important;
       opacity: 0 !important;
+    }
+    .stats-beat {
+      animation: none !important;
+      text-shadow: none !important;
     }
   }
 }
