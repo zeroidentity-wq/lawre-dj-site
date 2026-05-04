@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { ContactForm } from '@/components/forms/ContactForm'
 import { CTABlock } from '@/components/marketing/CTABlock'
-import { Hero } from '@/components/marketing/Hero'
+import { HeroRotating } from '@/components/marketing/HeroRotating'
 import { JsonLd } from '@/components/marketing/JsonLd'
 import { PackageCard } from '@/components/marketing/PackageCard'
 import { PostCard } from '@/components/marketing/PostCard'
@@ -21,19 +21,21 @@ import {
   getRecentGalleries,
   getRecentPosts,
   getServices,
+  getSiteSettings,
 } from '@/lib/site-data'
 import type { Gallery, Media, Package, Post, Service, Testimonial } from '@/payload-types'
 
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'Lawre DJ — DJ pentru evenimente București | Nuntă, Corporate, Club',
-  description: SITE_DESCRIPTION,
+  title: 'Lawre DJ — DJ Nuntă, Botez, Majorat București | Pachete de la 350€',
+  description:
+    'DJ profesionist din București pentru nuntă, botez, majorat și petreceri private. Echipament propriu, mix personalizat, pachete transparente. Cere ofertă.',
   alternates: { canonical: '/' },
   openGraph: {
-    title: `${SITE_NAME} — Sunet care schimbă seara`,
+    title: 'Lawre DJ — DJ Nuntă, Botez, Majorat București',
     description:
-      'DJ profesionist din București cu peste 300 de evenimente. Nuntă, corporate, club. Echipament propriu, mixuri live, atmosferă autentică.',
+      'DJ profesionist din București pentru nuntă, botez, majorat și petreceri private. Echipament propriu, mix personalizat, pachete transparente.',
     url: SITE_URL,
   },
 }
@@ -44,20 +46,41 @@ const FALLBACK_SERVICES: Array<{
   description: string
   href: string
   featured?: boolean
+  cardTag?: string
 }> = [
   {
     title: 'DJ Nuntă',
-    subtitle: 'Cel mai cerut',
     description:
       'De la cununie civilă până la afterparty — coordonare cu fotograful, intrarea mirilor, primul dans, sârba, distracție până dimineața.',
     href: '/servicii/dj-nunta-bucuresti',
     featured: true,
+    cardTag: 'most-popular',
   },
   {
     title: 'DJ Botez',
     description:
       'Atmosferă potrivită pentru toate vârstele — nași, părinți, "lapte și miere", petrecere.',
     href: '/servicii/dj-botez-bucuresti',
+    featured: true,
+    cardTag: 'specialty',
+  },
+  {
+    title: 'DJ Majorat',
+    description:
+      'Petreceri de 18 ani memorabile — hituri internaționale și românești, atmosferă tinerească.',
+    href: '/servicii/dj-majorat-bucuresti',
+  },
+  {
+    title: 'DJ Cununie Civilă',
+    description:
+      'Muzică perfectă pentru ceremonii — intrarea miresei, semnarea actelor, ieșirea cuplului.',
+    href: '/servicii/dj-cununie-civila',
+  },
+  {
+    title: 'DJ Petrecere Privată',
+    description:
+      'Aniversări, party-uri în vilă, evenimente intime — echipament scalabil de la 50 la 500+ invitați.',
+    href: '/servicii/dj-petrecere-privata',
   },
   {
     title: 'DJ Corporate',
@@ -71,16 +94,9 @@ const FALLBACK_SERVICES: Array<{
     href: '/servicii/dj-club-rezidenta',
   },
   {
-    title: 'DJ Majorat',
-    description:
-      'Petreceri de 18 ani memorabile — hituri internaționale și românești, atmosferă tinerească.',
-    href: '/servicii/dj-majorat-bucuresti',
-  },
-  {
-    title: 'DJ Petrecere Privată',
-    description:
-      'Aniversări, party-uri în vilă, evenimente intime — echipament scalabil de la 50 la 500+ invitați.',
-    href: '/servicii/dj-petrecere-privata',
+    title: 'Sonorizare Evenimente',
+    description: 'Sisteme audio profesionale pentru conferințe, spectacole și outdoor-uri.',
+    href: '/servicii/sonorizare-evenimente',
   },
 ]
 
@@ -186,14 +202,49 @@ function galleryCover(g: Gallery): { url: string; alt: string } | null {
   return mediaUrl(first ?? null)
 }
 
+const DEFAULT_HERO_VARIANTS = [
+  {
+    short: 'botezul copilului vostru',
+    eyebrow: 'DJ • Botezuri • București',
+    cta: 'Cere ofertă pentru botez',
+    hashUrl: '/cerere-oferta?service=botez',
+  },
+  {
+    short: 'nunta voastră',
+    eyebrow: 'DJ • Nunți • București',
+    cta: 'Cere ofertă pentru nuntă',
+    hashUrl: '/cerere-oferta?service=nunta',
+  },
+  {
+    short: 'majoratul ei',
+    eyebrow: 'DJ • Majorate • București',
+    cta: 'Cere ofertă pentru majorat',
+    hashUrl: '/cerere-oferta?service=majorat',
+  },
+  {
+    short: 'petrecerea voastră',
+    eyebrow: 'DJ • Petreceri private • București',
+    cta: 'Cere ofertă pentru petrecere',
+    hashUrl: '/cerere-oferta?service=petrecere',
+  },
+]
+
 export default async function HomePage() {
-  const [services, packages, testimonials, galleries, posts] = await Promise.all([
-    getServices(6),
+  const [settings, services, packages, testimonials, galleries, posts] = await Promise.all([
+    getSiteSettings(),
+    getServices(8),
     getPackages(3),
     getFeaturedTestimonials(3),
     getRecentGalleries(4),
     getRecentPosts(3),
   ])
+
+  const heroVariants =
+    settings?.heroRotating?.variants && settings.heroRotating.variants.length > 0
+      ? (settings.heroRotating.variants as typeof DEFAULT_HERO_VARIANTS)
+      : DEFAULT_HERO_VARIANTS
+  const heroStaticTitle = settings?.heroRotating?.staticTitle ?? 'Sunet care schimbă'
+  const heroIntervalMs = settings?.heroRotating?.intervalMs ?? 2800
 
   const localBusiness = {
     '@context': 'https://schema.org',
@@ -221,7 +272,11 @@ export default async function HomePage() {
 
   return (
     <>
-      <Hero />
+      <HeroRotating
+        variants={heroVariants}
+        staticTitle={heroStaticTitle}
+        intervalMs={heroIntervalMs}
+      />
 
       <StatsStrip />
 
@@ -260,23 +315,24 @@ export default async function HomePage() {
         <header className="max-w-2xl">
           <Eyebrow>Servicii</Eyebrow>
           <h2 className="mt-4 font-display text-3xl md:text-5xl font-medium tracking-[-0.015em]">
-            De la primul dans la afterparty.
+            Pentru momentele care se țin minte.
           </h2>
           <p className="mt-5 text-bone-muted text-base md:text-lg leading-relaxed">
-            Indiferent de tipul evenimentului, primești același nivel de profesionalism —
-            echipament, prezență și mix.
+            Specializat pe evenimentele care contează pentru voi — nuntă, botez, majorat. Plus tot
+            ce vine în jur.
           </p>
         </header>
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.length > 0
-            ? services.map((s, i) => (
+            ? services.map((s) => (
                 <ServiceCard
                   key={s.id}
                   title={s.title}
                   subtitle={s.eyebrow ?? undefined}
                   description={s.shortDescription ?? undefined}
                   href={`/servicii/${s.slug}`}
-                  featured={i === 0}
+                  featured={s.featured ?? false}
+                  cardTag={s.cardTag ?? undefined}
                 />
               ))
             : FALLBACK_SERVICES.map((s) => (
@@ -287,6 +343,7 @@ export default async function HomePage() {
                   description={s.description}
                   href={s.href}
                   featured={s.featured}
+                  cardTag={s.cardTag}
                 />
               ))}
         </div>
@@ -465,7 +522,7 @@ export default async function HomePage() {
 
       <CTABlock
         heading="Ai data fixă? Hai să vorbim."
-        body="Spune-mi tipul evenimentului, data și locația. Îți răspund în 24h cu disponibilitate și un pachet potrivit."
+        body="Spune-mi tipul evenimentului, data și locația. Îți răspund în 24h cu disponibilitate și un pachet potrivit. Răspund în max 24h, nu cu 'te sun mâine'."
         primaryLabel="Cere ofertă personalizată →"
         primaryHref="/cerere-oferta"
         secondaryLabel="Scrie pe WhatsApp"

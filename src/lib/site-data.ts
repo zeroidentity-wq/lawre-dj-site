@@ -26,10 +26,10 @@ export async function getSiteSettings(): Promise<SiteSetting | null> {
   }
 }
 
-export async function getServices(limit = 6): Promise<Service[]> {
+export async function getServices(limit = 8): Promise<Service[]> {
   try {
     const p = await payload()
-    const { docs } = await p.find({ collection: 'services', limit, depth: 1 })
+    const { docs } = await p.find({ collection: 'services', limit, sort: 'displayOrder', depth: 1 })
     return docs
   } catch (err) {
     console.error('[site-data] getServices failed', err)

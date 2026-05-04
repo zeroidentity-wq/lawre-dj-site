@@ -353,6 +353,15 @@ export interface Service {
   id: number;
   title: string;
   slug: string;
+  /**
+   * Ordinea pe homepage. Mai mic = primul card afișat.
+   */
+  displayOrder?: number | null;
+  cardTag?: ('none' | 'most-popular' | 'specialty' | 'new') | null;
+  /**
+   * Card cu border accent (atrage atenție)
+   */
+  featured?: boolean | null;
   eyebrow?: string | null;
   shortDescription?: string | null;
   heroImage?: (number | null) | Media;
@@ -1057,6 +1066,9 @@ export interface PostsSelect<T extends boolean = true> {
 export interface ServicesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  displayOrder?: T;
+  cardTag?: T;
+  featured?: T;
   eyebrow?: T;
   shortDescription?: T;
   heroImage?: T;
@@ -1392,6 +1404,37 @@ export interface SiteSetting {
     metaDescription?: string | null;
     ogImage?: (number | null) | Media;
   };
+  heroRotating?: {
+    /**
+     * Partea fixă a textului hero (ex: "Sunet care schimbă")
+     */
+    staticTitle?: string | null;
+    /**
+     * Cât stă fiecare variantă pe ecran (ms). Recomandat: 2800.
+     */
+    intervalMs?: number | null;
+    variants?:
+      | {
+          /**
+           * Ex: "nunta voastră", "botezul copilului vostru"
+           */
+          short: string;
+          /**
+           * Ex: "DJ • Nunți • București"
+           */
+          eyebrow: string;
+          /**
+           * Ex: "Cere ofertă pentru nuntă"
+           */
+          cta: string;
+          /**
+           * Ex: "/cerere-oferta?service=nunta"
+           */
+          hashUrl: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1459,6 +1502,21 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         metaTitle?: T;
         metaDescription?: T;
         ogImage?: T;
+      };
+  heroRotating?:
+    | T
+    | {
+        staticTitle?: T;
+        intervalMs?: T;
+        variants?:
+          | T
+          | {
+              short?: T;
+              eyebrow?: T;
+              cta?: T;
+              hashUrl?: T;
+              id?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
