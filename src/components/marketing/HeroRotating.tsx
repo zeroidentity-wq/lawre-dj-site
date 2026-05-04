@@ -35,10 +35,22 @@ export function HeroRotating({
     if (isPaused || prefersReducedMotion.current || !variants?.length) return
     const isMobile = window.innerWidth < 768
     const effectiveInterval = isMobile ? Math.max(intervalMs, 4000) : intervalMs
-    const timer = setInterval(() => {
+
+    // First change happens quickly so users immediately see the rotation
+    const initialDelay = 1200
+    let interval: ReturnType<typeof setInterval>
+
+    const firstTick = setTimeout(() => {
       setIndex((prev) => (prev + 1) % variants.length)
-    }, effectiveInterval)
-    return () => clearInterval(timer)
+      interval = setInterval(() => {
+        setIndex((prev) => (prev + 1) % variants.length)
+      }, effectiveInterval)
+    }, initialDelay)
+
+    return () => {
+      clearTimeout(firstTick)
+      clearInterval(interval)
+    }
   }, [intervalMs, isPaused, variants?.length])
 
   if (!variants || variants.length === 0) return null
