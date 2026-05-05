@@ -56,7 +56,7 @@
   }
 
   .waveform-divider-sweep {
-    animation: dividerSweep 9s ease-in-out infinite;
+    animation: dividerSweep 6.5s ease-in-out infinite;
     will-change: transform, opacity;
   }
 

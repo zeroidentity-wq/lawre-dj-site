@@ -20,8 +20,8 @@ type Props = {
  * Pure CSS, no JS — safe in server components.
  */
 export function WaveformDivider({ className, delay = 0, variant = 'rail' }: Props) {
-  // Cycle is 9s; offset each instance by up to ~4.5s to desync.
-  const animationDelay = `${(delay * 1.1).toFixed(2)}s`
+  // Cycle is 6.5s; offset each instance by up to ~3s to desync.
+  const animationDelay = `${(delay * 0.8).toFixed(2)}s`
 
   return (
     <div
@@ -55,7 +55,7 @@ export function WaveformDivider({ className, delay = 0, variant = 'rail' }: Prop
 
       {/* Traveling pulse */}
       <div
-        className="waveform-divider-sweep absolute inset-y-0 w-[28%] bg-gradient-to-r from-transparent via-neon-500/70 to-transparent"
+        className="waveform-divider-sweep absolute inset-y-0 w-[28%] bg-gradient-to-r from-transparent via-neon-500/90 to-transparent"
         style={{ animationDelay, filter: 'blur(0.5px)' }}
       />
     </div>
