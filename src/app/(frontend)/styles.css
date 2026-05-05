@@ -83,6 +83,16 @@
     100% { transform: translateX(360%); opacity: 0; }
   }
 
+  /* Spinning vinyl record decoration */
+  .vinyl-spin {
+    animation: vinylSpin 24s linear infinite;
+  }
+
+  @keyframes vinylSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero-eyebrow-anim,
     .hero-variant-anim {
@@ -101,6 +111,9 @@
     .stats-beat {
       animation: none !important;
       text-shadow: none !important;
+    }
+    .vinyl-spin {
+      animation: none !important;
     }
   }
 }

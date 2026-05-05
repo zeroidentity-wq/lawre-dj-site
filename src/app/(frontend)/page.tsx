@@ -14,6 +14,7 @@ import { TestimonialCard } from '@/components/marketing/TestimonialCard'
 import { Container } from '@/components/ui/Container'
 import { Eyebrow } from '@/components/ui/Eyebrow'
 import { Section } from '@/components/ui/Section'
+import { VinylDisc } from '@/components/ui/VinylDisc'
 import { CONTACT, DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/constants'
 import {
   getFeaturedTestimonials,
@@ -309,14 +310,17 @@ export default async function HomePage() {
               <span aria-hidden>→</span>
             </Link>
           </div>
-          <div className="relative w-full max-w-[340px] mx-auto lg:mx-0 aspect-[3/4] rounded-xl overflow-hidden order-first lg:order-last">
-            <Image
-              src="/images/lawre-dj-portrait.png"
-              alt="Lawre DJ"
-              fill
-              sizes="(max-width: 1024px) 90vw, 340px"
-              className="object-cover object-top"
-            />
+          <div className="relative w-full max-w-[340px] mx-auto lg:mx-0 order-first lg:order-last">
+            <VinylDisc className="absolute -bottom-10 -right-10 w-48 h-48 opacity-[0.22] pointer-events-none" />
+            <div className="relative z-10 aspect-[3/4] rounded-xl overflow-hidden">
+              <Image
+                src="/images/lawre-dj-portrait.png"
+                alt="Lawre DJ"
+                fill
+                sizes="(max-width: 1024px) 90vw, 340px"
+                className="object-cover object-top"
+              />
+            </div>
           </div>
         </div>
       </Section>
