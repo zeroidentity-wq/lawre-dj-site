@@ -59,7 +59,7 @@ export default async function BlogPage() {
   return (
     <>
       {/* Hero */}
-      <Section className="pt-24 pb-12 border-b border-hairline">
+      <Section className="pt-24 pb-12">
         <Container>
           <p className="text-xs uppercase tracking-[0.12em] text-neon-400 font-medium mb-4">
             Blog
@@ -74,7 +74,7 @@ export default async function BlogPage() {
       </Section>
 
       {/* Posts grid */}
-      <Section className="py-16">
+      <Section divider dividerDelay={0.4} className="py-16">
         <Container>
           {posts.length === 0 ? (
             <p className="text-bone-muted text-center py-16">

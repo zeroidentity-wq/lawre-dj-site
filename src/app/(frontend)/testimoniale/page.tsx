@@ -80,7 +80,7 @@ export default async function TestimonialeePage() {
       )}
 
       {/* Hero */}
-      <Section className="pt-24 pb-12 border-b border-hairline">
+      <Section className="pt-24 pb-12">
         <Container>
           <p className="text-xs uppercase tracking-[0.12em] text-neon-400 font-medium mb-4">
             Testimoniale
@@ -110,7 +110,7 @@ export default async function TestimonialeePage() {
       </Section>
 
       {/* Grid */}
-      <Section className="py-16">
+      <Section divider dividerDelay={0.3} className="py-16">
         <Container>
           {testimonials.length === 0 ? (
             <div className="text-center py-20">

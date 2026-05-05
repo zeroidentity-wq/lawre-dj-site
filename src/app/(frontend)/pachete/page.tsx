@@ -34,7 +34,7 @@ export default async function PachetePage() {
   return (
     <>
       {/* Hero */}
-      <Section className="pt-24 pb-12 border-b border-hairline">
+      <Section className="pt-24 pb-12">
         <Container>
           <p className="text-xs uppercase tracking-[0.12em] text-neon-400 font-medium mb-4">
             Pachete
@@ -49,7 +49,7 @@ export default async function PachetePage() {
       </Section>
 
       {/* Packages grid */}
-      <Section className="py-16">
+      <Section divider dividerDelay={0.5} className="py-16">
         <Container>
           {packages.length === 0 ? (
             <p className="text-bone-muted text-center py-12">

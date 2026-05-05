@@ -152,7 +152,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
   return (
     <>
       {/* Article header */}
-      <Section className="pt-20 pb-10 border-b border-hairline">
+      <Section className="pt-20 pb-10">
         <Container size="narrow">
           <Breadcrumbs items={breadcrumbs} />
 
@@ -185,7 +185,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
       </Section>
 
       {/* Article content */}
-      <Section className="py-14">
+      <Section divider dividerDelay={0.4} className="py-14">
         <Container size="narrow">
           {post.content ? (
             <div className="prose prose-invert max-w-none prose-headings:font-display prose-headings:tracking-tight prose-headings:text-bone prose-p:text-bone-muted prose-p:leading-relaxed prose-li:text-bone-muted prose-strong:text-bone prose-a:text-neon-400 hover:prose-a:text-neon-300 prose-a:no-underline hover:prose-a:underline prose-hr:border-hairline">
@@ -199,7 +199,7 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
 
       {/* Related articles */}
       {related.length > 0 && (
-        <Section className="py-14 border-t border-hairline">
+        <Section divider dividerDelay={1.5} className="py-14">
           <Container>
             <h2 className="font-display text-2xl font-semibold text-bone mb-8">
               Articole similare

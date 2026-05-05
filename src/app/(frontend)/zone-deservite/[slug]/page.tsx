@@ -104,7 +104,7 @@ export default function ZoneSlugPage({ params }: { params: { slug: string } }) {
       <JsonLd data={breadcrumbSchema} />
 
       {/* Hero */}
-      <Section className="pt-24 pb-12 border-b border-hairline">
+      <Section className="pt-24 pb-12">
         <Container>
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-2 text-xs text-bone-dim">
@@ -135,7 +135,7 @@ export default function ZoneSlugPage({ params }: { params: { slug: string } }) {
       </Section>
 
       {/* Content + sidebar */}
-      <Section className="py-16">
+      <Section divider dividerDelay={0.6} className="py-16">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-12 lg:gap-16">
             {/* Body text */}

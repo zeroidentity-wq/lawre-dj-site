@@ -63,7 +63,7 @@ export default async function EchipamentPage() {
   return (
     <>
       {/* Hero */}
-      <Section className="pt-24 pb-12 border-b border-hairline">
+      <Section className="pt-24 pb-12">
         <Container>
           <p className="text-xs uppercase tracking-[0.12em] text-neon-400 font-medium mb-4">
             Echipament
@@ -78,7 +78,7 @@ export default async function EchipamentPage() {
       </Section>
 
       {/* Equipment list */}
-      <Section className="py-16">
+      <Section divider dividerDelay={0.9} className="py-16">
         <Container>
           {Object.keys(grouped).length === 0 ? (
             <div className="text-center py-20">

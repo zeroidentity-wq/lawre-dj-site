@@ -19,7 +19,7 @@ const orase = ZONES.filter((z) => z.type === 'oras')
 export default function ZoneDesservitePage() {
   return (
     <>
-      <Section className="pt-24 pb-12 border-b border-hairline">
+      <Section className="pt-24 pb-12">
         <Container>
           <p className="text-xs uppercase tracking-[0.12em] text-neon-400 font-medium mb-4">
             Zone deservite
@@ -33,7 +33,7 @@ export default function ZoneDesservitePage() {
         </Container>
       </Section>
 
-      <Section className="py-16">
+      <Section divider dividerDelay={0.5} className="py-16">
         <Container>
           <div className="space-y-12">
             <div>

@@ -96,7 +96,7 @@ export default async function PacheteSlugPage({
       <JsonLd data={offerSchema} />
 
       {/* Hero */}
-      <Section className="pt-24 pb-12 border-b border-hairline">
+      <Section className="pt-24 pb-12">
         <Container>
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-2 text-xs text-bone-dim">
@@ -130,7 +130,7 @@ export default async function PacheteSlugPage({
       </Section>
 
       {/* Content */}
-      <Section className="py-16">
+      <Section divider dividerDelay={0.5} className="py-16">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12 lg:gap-16">
             {/* Left — features + description */}

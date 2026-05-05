@@ -2,6 +2,7 @@ import { Breadcrumbs, type BreadcrumbItem } from '@/components/marketing/Breadcr
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
 import { Eyebrow } from '@/components/ui/Eyebrow'
+import { WaveformDivider } from '@/components/ui/WaveformDivider'
 
 type CTA = { label: string; href: string }
 
@@ -27,7 +28,7 @@ export function PillarHero({
   ctaSecondary,
 }: Props) {
   return (
-    <section className="pt-12 pb-16 md:pt-20 md:pb-24 border-b border-hairline">
+    <section className="pt-12 pb-16 md:pt-20 md:pb-24 relative">
       <Container>
         {breadcrumbs && breadcrumbs.length > 0 && (
           <Breadcrumbs items={breadcrumbs} className="mb-8" />
@@ -69,6 +70,7 @@ export function PillarHero({
           )}
         </div>
       </Container>
+      <WaveformDivider className="absolute bottom-0 left-0 right-0" delay={0.3} />
     </section>
   )
 }

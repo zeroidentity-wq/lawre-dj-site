@@ -78,7 +78,7 @@ export default async function DesprePage() {
       />
 
       {/* Hero */}
-      <Section className="pt-24 pb-12 border-b border-hairline">
+      <Section className="pt-24 pb-12">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-10 lg:gap-16 items-center">
             <div>
@@ -107,13 +107,18 @@ export default async function DesprePage() {
       </Section>
 
       {/* Stats */}
-      <Section className="py-12 border-b border-hairline">
+      <Section divider dividerDelay={0.4} className="py-12">
         <Container>
           <dl className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {STATS.map((s) => (
+            {STATS.map((s, i) => (
               <div key={s.label}>
                 <dt className="text-xs uppercase tracking-[0.08em] text-bone-dim mb-1">{s.label}</dt>
-                <dd className="font-display text-4xl font-semibold text-bone">{s.value}</dd>
+                <dd
+                  className="font-display text-4xl font-semibold text-bone stats-beat"
+                  style={{ animationDelay: `${(i * 0.167).toFixed(3)}s` }}
+                >
+                  {s.value}
+                </dd>
               </div>
             ))}
           </dl>
@@ -121,7 +126,7 @@ export default async function DesprePage() {
       </Section>
 
       {/* Bio */}
-      <Section className="py-16">
+      <Section divider dividerDelay={1.5} className="py-16">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12 lg:gap-16">
             {/* Text */}
@@ -206,7 +211,7 @@ export default async function DesprePage() {
 
       {/* Testimonials */}
       {testimonials.length > 0 && (
-        <Section className="py-16 border-t border-hairline">
+        <Section divider dividerDelay={2.6} className="py-16">
           <Container>
             <h2 className="font-display text-2xl font-medium text-bone mb-8">Ce spun clienții</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

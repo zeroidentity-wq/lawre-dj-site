@@ -52,7 +52,7 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <Section className="pt-24 pb-12 border-b border-hairline">
+      <Section className="pt-24 pb-12">
         <Container>
           <p className="text-xs uppercase tracking-[0.12em] text-neon-400 font-medium mb-4">
             Contact
@@ -67,7 +67,7 @@ export default function ContactPage() {
       </Section>
 
       {/* Contact info + form */}
-      <Section className="py-16">
+      <Section divider dividerDelay={0.6} className="py-16">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Left — info */}
