@@ -2,6 +2,57 @@ import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
 import { WaveformDivider } from '@/components/ui/WaveformDivider'
 
+const AMBIENT_BARS = [
+  { h: 22, dur: 1.10, delay: 0.00 },
+  { h: 45, dur: 0.82, delay: 0.04 },
+  { h: 30, dur: 1.25, delay: 0.08 },
+  { h: 68, dur: 0.90, delay: 0.12 },
+  { h: 52, dur: 1.15, delay: 0.16 },
+  { h: 85, dur: 0.76, delay: 0.20 },
+  { h: 38, dur: 1.30, delay: 0.24 },
+  { h: 72, dur: 0.95, delay: 0.28 },
+  { h: 95, dur: 1.05, delay: 0.32 },
+  { h: 44, dur: 0.85, delay: 0.36 },
+  { h: 60, dur: 1.20, delay: 0.40 },
+  { h: 28, dur: 0.72, delay: 0.44 },
+  { h: 78, dur: 1.08, delay: 0.48 },
+  { h: 55, dur: 0.88, delay: 0.52 },
+  { h: 90, dur: 1.35, delay: 0.56 },
+  { h: 36, dur: 0.80, delay: 0.60 },
+  { h: 65, dur: 1.12, delay: 0.64 },
+  { h: 48, dur: 0.93, delay: 0.68 },
+  { h: 82, dur: 1.22, delay: 0.72 },
+  { h: 33, dur: 0.78, delay: 0.76 },
+  { h: 58, dur: 1.18, delay: 0.80 },
+  { h: 76, dur: 0.86, delay: 0.84 },
+  { h: 42, dur: 1.28, delay: 0.88 },
+  { h: 88, dur: 0.74, delay: 0.92 },
+  { h: 25, dur: 1.05, delay: 0.96 },
+  { h: 70, dur: 0.91, delay: 1.00 },
+  { h: 50, dur: 1.16, delay: 1.04 },
+  { h: 92, dur: 0.82, delay: 1.08 },
+  { h: 40, dur: 1.24, delay: 1.12 },
+  { h: 63, dur: 0.88, delay: 1.16 },
+  { h: 35, dur: 1.10, delay: 1.20 },
+  { h: 80, dur: 0.79, delay: 1.24 },
+  { h: 55, dur: 1.32, delay: 1.28 },
+  { h: 45, dur: 0.95, delay: 1.32 },
+  { h: 72, dur: 1.08, delay: 1.36 },
+  { h: 28, dur: 0.75, delay: 1.40 },
+  { h: 88, dur: 1.20, delay: 1.44 },
+  { h: 62, dur: 0.87, delay: 1.48 },
+  { h: 38, dur: 1.15, delay: 1.52 },
+  { h: 74, dur: 0.93, delay: 1.56 },
+  { h: 50, dur: 1.28, delay: 1.60 },
+  { h: 32, dur: 0.81, delay: 1.64 },
+  { h: 66, dur: 1.05, delay: 1.68 },
+  { h: 85, dur: 0.76, delay: 1.72 },
+  { h: 44, dur: 1.18, delay: 1.76 },
+  { h: 58, dur: 0.90, delay: 1.80 },
+  { h: 78, dur: 1.12, delay: 1.84 },
+  { h: 30, dur: 0.84, delay: 1.88 },
+]
+
 type Props = {
   heading: string
   body?: string
@@ -23,6 +74,30 @@ export function CTABlock({
     <section className="relative bg-ink-soft py-20 md:py-28">
       <WaveformDivider className="absolute top-0 left-0 right-0" delay={2.2} />
       <WaveformDivider className="absolute bottom-0 left-0 right-0" delay={3.4} />
+
+      {/* Ambient spectrum bars — full-width background texture */}
+      <div
+        className="absolute inset-0 flex items-end overflow-hidden pointer-events-none opacity-[0.09]"
+        aria-hidden
+        style={{
+          maskImage: 'linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)',
+        }}
+      >
+        {AMBIENT_BARS.map((bar, i) => (
+          <span
+            key={i}
+            className="waveform-bar flex-1 block"
+            style={{
+              height: `${bar.h}%`,
+              background: '#d946ef',
+              transformOrigin: 'bottom',
+              animation: `waveBar ${bar.dur}s ease-in-out ${bar.delay}s infinite`,
+            }}
+          />
+        ))}
+      </div>
+
       <Container>
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-display text-3xl md:text-5xl font-medium tracking-[-0.015em]">
