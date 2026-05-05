@@ -62,7 +62,7 @@ const SINE_PATH_MOBILE =
 
 export function HeroRotating({
   variants,
-  staticTitle = 'Sunet care schimbă',
+  staticTitle = 'Sunetul care schimbă',
   intervalMs = 2800,
 }: HeroRotatingProps) {
   const [index, setIndex] = useState(0)

@@ -46,8 +46,8 @@ export const SiteSettings: GlobalConfig = {
         {
           name: 'staticTitle',
           type: 'text',
-          defaultValue: 'Sunet care schimbă',
-          admin: { description: 'Partea fixă a textului hero (ex: "Sunet care schimbă")' },
+          defaultValue: 'Sunetul care schimbă',
+          admin: { description: 'Partea fixă a textului hero (ex: "Sunetul care schimbă")' },
         },
         {
           name: 'intervalMs',

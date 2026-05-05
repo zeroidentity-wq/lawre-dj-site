@@ -246,7 +246,7 @@ export default async function HomePage() {
     settings?.heroRotating?.variants && settings.heroRotating.variants.length > 0
       ? (settings.heroRotating.variants as typeof DEFAULT_HERO_VARIANTS)
       : DEFAULT_HERO_VARIANTS
-  const heroStaticTitle = settings?.heroRotating?.staticTitle ?? 'Sunet care schimbă'
+  const heroStaticTitle = settings?.heroRotating?.staticTitle ?? 'Sunetul care schimbă'
   const heroIntervalMs = settings?.heroRotating?.intervalMs ?? 2800
 
   const localBusiness = {
