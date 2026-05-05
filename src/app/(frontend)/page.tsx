@@ -70,6 +70,8 @@ const FALLBACK_SERVICES: Array<{
     description:
       'Petreceri de 18 ani memorabile — hituri internaționale și românești, atmosferă tinerească.',
     href: '/servicii/dj-majorat-bucuresti',
+    featured: true,
+    cardTag: 'top-rated',
   },
   {
     title: 'DJ Cununie Civilă',

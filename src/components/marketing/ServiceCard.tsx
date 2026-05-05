@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils'
 const TAG_LABELS: Record<string, string> = {
   'most-popular': 'Cel mai cerut',
   specialty: 'Specialitate',
+  'top-rated': 'Top alegere',
   new: 'Nou',
 }
 
