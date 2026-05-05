@@ -32,6 +32,11 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
+  icons: {
+    icon: '/images/logo_3.png',
+    shortcut: '/images/logo_3.png',
+    apple: '/images/logo_3.png',
+  },
   robots: { index: true, follow: true },
   openGraph: {
     type: 'website',

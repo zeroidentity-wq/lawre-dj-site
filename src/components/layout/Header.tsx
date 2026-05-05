@@ -1,5 +1,6 @@
+import Image from 'next/image'
 import Link from 'next/link'
-import { NAV_ITEMS } from '@/lib/constants'
+import { HEADER_LOGO, NAV_ITEMS } from '@/lib/constants'
 import { Container } from '@/components/ui/Container'
 import { Button } from '@/components/ui/Button'
 import { HeaderMobileMenu } from './HeaderMobileMenu'
@@ -7,12 +8,29 @@ import { HeaderMobileMenu } from './HeaderMobileMenu'
 export function Header() {
   return (
     <header className="sticky top-0 z-30 backdrop-blur bg-ink/80 border-b border-hairline">
-      <Container className="flex items-center justify-between h-16 md:h-20">
+      <Container className="flex items-center justify-between h-20 md:h-24">
         <Link href="/" className="inline-flex items-center gap-2.5 group">
-          <span className="size-2 rounded-sm bg-neon-500 group-hover:bg-neon-400 transition-colors" aria-hidden />
-          <span className="font-display font-medium tracking-tight text-bone text-base md:text-lg">
-            LAWRE DJ
-          </span>
+          {HEADER_LOGO === 'image' ? (
+            <Image
+              src="/images/logo_3.png"
+              alt="Lawre DJ"
+              height={176}
+              width={264}
+              className="h-[60px] md:h-[88px] w-auto"
+              priority
+              style={{
+                maskImage: 'linear-gradient(to right, black 88%, transparent 98%)',
+                WebkitMaskImage: 'linear-gradient(to right, black 88%, transparent 98%)',
+              }}
+            />
+          ) : (
+            <>
+              <span className="size-2 rounded-sm bg-neon-500 group-hover:bg-neon-400 transition-colors" aria-hidden />
+              <span className="font-display font-medium tracking-tight text-bone text-base md:text-lg">
+                LAWRE DJ
+              </span>
+            </>
+          )}
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">

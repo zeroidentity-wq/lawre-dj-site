@@ -1,8 +1,9 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { NAV_ITEMS } from '@/lib/constants'
+import { HEADER_LOGO, NAV_ITEMS } from '@/lib/constants'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 
@@ -57,17 +58,33 @@ export function HeaderMobileMenu() {
         )}
         style={{ height: '100dvh' }}
       >
-        {/* Top bar: logo + close — flex-none keeps it fixed height */}
-        <div className="flex-none flex items-center justify-between h-16 px-5 border-b border-hairline">
+        {/* Top bar: logo + close — matches main header height */}
+        <div className="flex-none flex items-center justify-between h-20 px-5 border-b border-hairline">
           <Link
             href="/"
             onClick={() => setOpen(false)}
             className="inline-flex items-center gap-2.5"
           >
-            <span className="size-2 rounded-sm bg-neon-500" aria-hidden />
-            <span className="font-display font-medium tracking-tight text-bone text-base">
-              LAWRE DJ
-            </span>
+            {HEADER_LOGO === 'image' ? (
+              <Image
+                src="/images/logo_3.png"
+                alt="Lawre DJ"
+                height={120}
+                width={180}
+                className="h-[60px] w-auto"
+                style={{
+                  maskImage: 'linear-gradient(to right, black 88%, transparent 98%)',
+                  WebkitMaskImage: 'linear-gradient(to right, black 88%, transparent 98%)',
+                }}
+              />
+            ) : (
+              <>
+                <span className="size-2 rounded-sm bg-neon-500" aria-hidden />
+                <span className="font-display font-medium tracking-tight text-bone text-base">
+                  LAWRE DJ
+                </span>
+              </>
+            )}
           </Link>
           <button
             type="button"

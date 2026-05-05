@@ -1,3 +1,6 @@
+// Set to 'image' to show the logo image, 'text' to show the classic LAWRE DJ + neon dot.
+export const HEADER_LOGO: 'image' | 'text' = 'image'
+
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:3000'
 
