@@ -66,7 +66,7 @@ export function HeroRotating({
   intervalMs = 2800,
 }: HeroRotatingProps) {
   const [index, setIndex] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
+  const isPausedRef = useRef(false)
   const prefersReducedMotion = useRef(false)
 
   useEffect(() => {
@@ -74,26 +74,26 @@ export function HeroRotating({
   }, [])
 
   useEffect(() => {
-    if (isPaused || prefersReducedMotion.current || !variants?.length) return
+    if (prefersReducedMotion.current || !variants?.length) return
     const isMobile = window.innerWidth < 768
     const effectiveInterval = isMobile ? Math.max(intervalMs, 4000) : intervalMs
 
-    // First change happens quickly so users immediately see the rotation
-    const initialDelay = 1200
-    let interval: ReturnType<typeof setInterval>
+    // Interval runs continuously — isPausedRef checked inside to avoid
+    // destroying/recreating the interval on every hover (desktop bug).
+    let intervalId: ReturnType<typeof setInterval>
 
     const firstTick = setTimeout(() => {
-      setIndex((prev) => (prev + 1) % variants.length)
-      interval = setInterval(() => {
-        setIndex((prev) => (prev + 1) % variants.length)
+      if (!isPausedRef.current) setIndex((prev) => (prev + 1) % variants.length)
+      intervalId = setInterval(() => {
+        if (!isPausedRef.current) setIndex((prev) => (prev + 1) % variants.length)
       }, effectiveInterval)
-    }, initialDelay)
+    }, 1200)
 
     return () => {
       clearTimeout(firstTick)
-      clearInterval(interval)
+      clearInterval(intervalId)
     }
-  }, [intervalMs, isPaused, variants?.length])
+  }, [intervalMs, variants?.length])
 
   if (!variants || variants.length === 0) return null
   const current = variants[index]!
@@ -101,10 +101,10 @@ export function HeroRotating({
   return (
     <section
       className="relative pt-16 pb-20 md:pt-24 md:pb-32 overflow-hidden"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onFocus={() => setIsPaused(true)}
-      onBlur={() => setIsPaused(false)}
+      onMouseEnter={() => { isPausedRef.current = true }}
+      onMouseLeave={() => { isPausedRef.current = false }}
+      onFocus={() => { isPausedRef.current = true }}
+      onBlur={() => { isPausedRef.current = false }}
     >
       <div className="container mx-auto px-6 md:px-8 max-w-[1400px]">
         <div
