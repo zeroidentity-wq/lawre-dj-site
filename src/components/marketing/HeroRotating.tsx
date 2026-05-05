@@ -116,7 +116,7 @@ export function HeroRotating({
 
         <h1 className="font-display text-[clamp(40px,6vw,72px)] font-medium leading-[1.05] tracking-[-0.02em] max-w-[820px]">
           <span className="block text-bone">{staticTitle}</span>
-          <span className="block relative h-[1.1em] overflow-hidden">
+          <span className="block relative h-[2.2em] md:h-[1.1em] overflow-hidden">
             <span
               key={`variant-${index}`}
               className="hero-variant-anim block text-neon-500"
