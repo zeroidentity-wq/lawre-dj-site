@@ -12,6 +12,10 @@ export function VinylDisc({ className }: { className?: string }) {
       {/* Disc body */}
       <circle cx="100" cy="100" r="99" fill="#0f0f0f" />
 
+      {/* Outer neon rim — makes disc visible against dark backgrounds */}
+      <circle cx="100" cy="100" r="98" fill="none" stroke="rgba(168,85,247,0.85)" strokeWidth="2.5" />
+      <circle cx="100" cy="100" r="96" fill="none" stroke="rgba(217,70,239,0.25)" strokeWidth="6" />
+
       {/* Groove rings */}
       {grooves.map((r) => (
         <circle
@@ -20,15 +24,15 @@ export function VinylDisc({ className }: { className?: string }) {
           cy="100"
           r={r}
           fill="none"
-          stroke="rgba(255,255,255,0.07)"
+          stroke="rgba(255,255,255,0.11)"
           strokeWidth="1.2"
         />
       ))}
 
       {/* Label */}
-      <circle cx="100" cy="100" r="32" fill="#130c22" />
-      <circle cx="100" cy="100" r="32" fill="none" stroke="rgba(168,85,247,0.45)" strokeWidth="0.8" />
-      <circle cx="100" cy="100" r="26" fill="none" stroke="rgba(168,85,247,0.25)" strokeWidth="0.6" />
+      <circle cx="100" cy="100" r="32" fill="#1a0a2e" />
+      <circle cx="100" cy="100" r="32" fill="none" stroke="rgba(168,85,247,0.70)" strokeWidth="1" />
+      <circle cx="100" cy="100" r="26" fill="none" stroke="rgba(168,85,247,0.40)" strokeWidth="0.8" />
 
       {/* Center hole */}
       <circle cx="100" cy="100" r="4.5" fill="#050505" />

@@ -1406,7 +1406,7 @@ export interface SiteSetting {
   };
   heroRotating?: {
     /**
-     * Partea fixă a textului hero (ex: "Sunet care schimbă")
+     * Partea fixă a textului hero (ex: "Sunetul care schimbă")
      */
     staticTitle?: string | null;
     /**

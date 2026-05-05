@@ -313,8 +313,8 @@ export default async function HomePage() {
             </Link>
           </div>
           <div className="relative w-full max-w-[340px] mx-auto lg:mx-0 order-first lg:order-last">
-            <VinylDisc className="absolute -bottom-10 -right-10 w-48 h-48 opacity-[0.22] pointer-events-none" />
-            <div className="relative z-10 aspect-[3/4] rounded-xl overflow-hidden">
+            <VinylDisc className="absolute -bottom-16 -right-16 w-64 h-64 opacity-[0.55] pointer-events-none" />
+            <div className="relative aspect-[3/4] rounded-xl overflow-hidden">
               <Image
                 src="/images/lawre-dj-portrait.png"
                 alt="Lawre DJ"
