@@ -1,0 +1,1 @@
+- [Homepage Animation Roadmap](homepage_animation_roadmap.md) — 5-item DJ-vibe animation rollout for the homepage; implementing incrementally, started with section dividers

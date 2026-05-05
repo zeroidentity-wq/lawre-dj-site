@@ -1,5 +1,16 @@
 # Lawre DJ — Site & Brand Project
 
+## Claude Memory (cross-environment)
+
+Memory files are committed at `.claude/memory/`. On a new machine, restore them by running:
+
+```bash
+mkdir -p ~/.claude/projects/$(pwd | sed 's|/|-|g' | sed 's|^-||')}/memory
+cp .claude/memory/* ~/.claude/projects/$(pwd | sed 's|/|-|g' | sed 's|^-||')/memory/
+```
+
+Or simply tell Claude: *"citește memory-ul din `.claude/memory/` și încarcă-l"* — Claude poate citi fișierele direct din repo.
+
 ## Project Overview
 
 **Client:** Lawre DJ — DJ profesionist din București, activ pe scena privată și de club.
