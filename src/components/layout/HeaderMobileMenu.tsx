@@ -2,36 +2,72 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { HEADER_LOGO, NAV_ITEMS } from '@/lib/constants'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 
+const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+
 export function HeaderMobileMenu() {
   const [open, setOpen] = useState(false)
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const closeBtnRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     if (!open) return
+    const dialog = dialogRef.current
+    if (!dialog) return
+
+    // Move initial focus to close button
+    const initial = closeBtnRef.current
+    initial?.focus()
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false)
+      if (e.key === 'Escape') {
+        setOpen(false)
+        return
+      }
+      if (e.key !== 'Tab') return
+      const focusable = Array.from(
+        dialog.querySelectorAll<HTMLElement>(FOCUSABLE),
+      ).filter((el) => !el.hasAttribute('disabled') && el.offsetParent !== null)
+      if (focusable.length === 0) {
+        e.preventDefault()
+        return
+      }
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      const active = document.activeElement as HTMLElement | null
+      if (e.shiftKey && active === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault()
+        first.focus()
+      }
     }
-    // overflow:hidden alone is enough — avoid position:fixed which collapses body height
-    // and breaks fixed overlay dimensions on iOS Safari
+
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', onKey)
     return () => {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', onKey)
+      // Return focus to the trigger that opened the menu
+      triggerRef.current?.focus()
     }
   }, [open])
 
   return (
     <div className="md:hidden">
       <button
+        ref={triggerRef}
         type="button"
         aria-label="Deschide meniul"
         aria-expanded={open}
         aria-controls="mobile-menu"
+        aria-haspopup="dialog"
         onClick={() => setOpen(true)}
         className="inline-flex size-11 items-center justify-center rounded-md border border-hairline text-bone hover:border-hairline2 transition-colors"
       >
@@ -46,10 +82,13 @@ export function HeaderMobileMenu() {
       {/* Overlay — z-50 sits above sticky header (z-30)
           height:100dvh adapts to mobile browser chrome dynamically */}
       <div
+        ref={dialogRef}
         id="mobile-menu"
         role="dialog"
         aria-modal="true"
         aria-label="Meniu de navigare"
+        aria-hidden={!open}
+        inert={!open}
         className={cn(
           'fixed inset-0 z-50 flex flex-col bg-ink transition-[opacity,transform] duration-300 ease-out',
           open
@@ -87,6 +126,7 @@ export function HeaderMobileMenu() {
             )}
           </Link>
           <button
+            ref={closeBtnRef}
             type="button"
             aria-label="Închide meniul"
             onClick={() => setOpen(false)}

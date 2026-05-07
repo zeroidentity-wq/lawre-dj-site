@@ -19,8 +19,11 @@ const config: Config = {
         },
         bone: {
           DEFAULT: '#fafafa',
+          // a1a1aa = ~7.2:1 on #0a0a0a — AAA for body
           muted: '#a1a1aa',
-          dim: '#71717a',
+          // bumped from #71717a (~4.3:1, fails WCAG AA on body text)
+          // #9a9aa3 → ~7:1 on #0a0a0a — AAA for normal text, AA-safe for small caps eyebrows
+          dim: '#9a9aa3',
         },
         neon: {
           50: '#fdf4ff',

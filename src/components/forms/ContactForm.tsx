@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useActionState } from 'react'
+import { useActionState, useEffect, useRef } from 'react'
 import { useFormStatus } from 'react-dom'
 import { submitContact, type SubmitState } from '@/app/(frontend)/actions'
 import { EVENT_TYPES, EVENT_TYPE_LABELS } from '@/lib/schemas/contact'
@@ -16,11 +16,31 @@ type Props = { variant?: 'compact' | 'full'; defaultEventType?: string }
 
 export function ContactForm({ variant = 'compact', defaultEventType }: Props) {
   const [state, formAction] = useActionState(submitContact, INITIAL)
+  const formRef = useRef<HTMLFormElement>(null)
+  const alertRef = useRef<HTMLParagraphElement>(null)
   const showFull = variant === 'full'
+
+  // Move focus to the first invalid field on validation failure,
+  // or to the alert region when there's a server error message.
+  useEffect(() => {
+    if (state.ok) return
+    const errors = state.errors
+    if (errors && Object.keys(errors).length > 0) {
+      const firstKey = Object.keys(errors)[0]
+      const el = formRef.current?.querySelector<HTMLElement>(`[name="${firstKey}"]`)
+      el?.focus()
+    } else if (state.message) {
+      alertRef.current?.focus()
+    }
+  }, [state])
 
   if (state.ok) {
     return (
-      <div className="bg-ink-soft border border-neon-500/40 rounded-lg p-8 text-center">
+      <div
+        role="status"
+        aria-live="polite"
+        className="bg-ink-soft border border-neon-500/40 rounded-lg p-8 text-center"
+      >
         <h3 className="font-display text-2xl font-medium tracking-tight text-bone">Mulțumim!</h3>
         <p className="mt-3 text-bone-muted">{state.message}</p>
       </div>
@@ -30,7 +50,7 @@ export function ContactForm({ variant = 'compact', defaultEventType }: Props) {
   const err = state.errors ?? {}
 
   return (
-    <form action={formAction} className="space-y-4">
+    <form ref={formRef} action={formAction} noValidate className="space-y-4">
       <Field label="Nume" name="name" required error={err.name} />
       <div className="grid gap-4 md:grid-cols-2">
         <Field label="Email" name="email" type="email" required error={err.email} />
@@ -81,7 +101,13 @@ export function ContactForm({ variant = 'compact', defaultEventType }: Props) {
       </div>
 
       {state.message && !state.ok && (
-        <p className="text-sm text-red-400" role="alert">
+        <p
+          ref={alertRef}
+          tabIndex={-1}
+          role="alert"
+          aria-live="assertive"
+          className="text-sm text-red-400 outline-none"
+        >
           {state.message}
         </p>
       )}
