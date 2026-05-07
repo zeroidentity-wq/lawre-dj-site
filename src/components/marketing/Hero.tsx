@@ -9,7 +9,7 @@ export function Hero() {
         <div className="max-w-3xl">
           <Eyebrow>DJ • Club &amp; Private Events • București</Eyebrow>
           <h1 className="mt-6 font-display font-medium tracking-[-0.02em] leading-[1.05] text-[clamp(40px,6vw,72px)]">
-            Sunet care schimbă seara.
+            Sunetul care schimbă seara.
           </h1>
           <p className="mt-6 text-bone-muted text-lg md:text-xl leading-relaxed max-w-2xl">
             Nuntă, corporate, club sau petrecere privată — Lawre aduce echipamentul, energia și
