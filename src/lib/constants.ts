@@ -74,4 +74,5 @@ export const FOOTER_COLUMNS = [
 export const LEGAL_LINKS = [
   { label: 'Termeni', href: '/termeni' },
   { label: 'Confidențialitate', href: '/confidentialitate' },
+  { label: 'Cookies', href: '/cookies' },
 ] as const

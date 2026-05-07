@@ -40,6 +40,8 @@ export async function submitContact(
         guestCount: parsed.data.guestCount,
         budget: parsed.data.budget,
         message: parsed.data.message,
+        gdprConsent: true,
+        gdprConsentAt: new Date().toISOString(),
       },
     })
     return { ok: true, message: 'Mulțumim, îți răspund în max 24h.' }

@@ -40,6 +40,11 @@ export const contactSchema = z.object({
     .pipe(z.number().int().positive('Număr invitați invalid').optional()),
   budget: optionalString,
   message: z.string().trim().min(10, 'Spune mai multe — minim 10 caractere'),
+  gdprConsent: z
+    .union([z.literal('on'), z.literal('true'), z.boolean()])
+    .refine((v) => v === 'on' || v === 'true' || v === true, {
+      message: 'Trebuie să accepți politica de confidențialitate',
+    }),
 })
 
 export type ContactInput = z.infer<typeof contactSchema>

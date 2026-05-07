@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useActionState } from 'react'
 import { useFormStatus } from 'react-dom'
 import { submitContact, type SubmitState } from '@/app/(frontend)/actions'
@@ -47,6 +48,38 @@ export function ContactForm({ variant = 'compact', defaultEventType }: Props) {
         </div>
       )}
       <TextareaField label="Mesaj" name="message" required error={err.message} />
+
+      <div className="pt-1">
+        <label htmlFor="gdprConsent" className="flex items-start gap-3 cursor-pointer">
+          <input
+            id="gdprConsent"
+            name="gdprConsent"
+            type="checkbox"
+            required
+            aria-invalid={Boolean(err.gdprConsent)}
+            aria-describedby={err.gdprConsent ? 'gdprConsent-err' : 'gdprConsent-desc'}
+            className="mt-1 size-4 rounded border-hairline bg-ink-soft accent-neon-500 focus:outline-none focus:ring-2 focus:ring-neon-500 focus:ring-offset-2 focus:ring-offset-ink"
+          />
+          <span id="gdprConsent-desc" className="text-xs text-bone-muted leading-relaxed">
+            Sunt de acord cu prelucrarea datelor mele personale (nume, email, telefon, detalii eveniment)
+            de către Lawre DJ în scopul de a-mi răspunde la această cerere, conform{' '}
+            <Link
+              href="/confidentialitate"
+              className="text-neon-400 hover:text-neon-300 underline underline-offset-2"
+            >
+              Politicii de confidențialitate
+            </Link>
+            . Îmi pot retrage consimțământul oricând.
+            <span className="text-neon-300 ml-0.5">*</span>
+          </span>
+        </label>
+        {err.gdprConsent && (
+          <p id="gdprConsent-err" className="mt-1.5 text-xs text-red-400">
+            {err.gdprConsent}
+          </p>
+        )}
+      </div>
+
       {state.message && !state.ok && (
         <p className="text-sm text-red-400" role="alert">
           {state.message}

@@ -718,6 +718,11 @@ export interface ContactSubmission {
   guestCount?: number | null;
   budget?: string | null;
   message?: string | null;
+  /**
+   * Bifat de utilizator la trimiterea formularului.
+   */
+  gdprConsent?: boolean | null;
+  gdprConsentAt?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1338,6 +1343,8 @@ export interface ContactSubmissionsSelect<T extends boolean = true> {
   guestCount?: T;
   budget?: T;
   message?: T;
+  gdprConsent?: T;
+  gdprConsentAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }

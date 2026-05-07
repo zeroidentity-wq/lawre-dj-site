@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk } from 'next/font/google'
 import Script from 'next/script'
 import React from 'react'
 
+import { CookieBanner } from '@/components/consent/CookieBanner'
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import { DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/constants'
@@ -59,20 +60,32 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ro" className={`${display.variable} ${sans.variable}`}>
       <body className="flex flex-col min-h-screen">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:rounded-md focus:bg-neon-500 focus:text-ink focus:font-medium"
+        >
+          Sari la conținut
+        </a>
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
+          {children}
+        </main>
         <Footer />
         {GA_ID && (
           <>
+            <Script id="ga4-consent-default" strategy="beforeInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});`}
+            </Script>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
               strategy="afterInteractive"
             />
             <Script id="ga4-init" strategy="afterInteractive">
-              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${GA_ID}');`}
+              {`gtag('js',new Date());gtag('config','${GA_ID}',{anonymize_ip:true});`}
             </Script>
           </>
         )}
+        <CookieBanner gaId={GA_ID} />
       </body>
     </html>
   )

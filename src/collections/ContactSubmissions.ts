@@ -23,5 +23,17 @@ export const ContactSubmissions: CollectionConfig = {
     { name: 'guestCount', type: 'number' },
     { name: 'budget', type: 'text' },
     { name: 'message', type: 'textarea' },
+    {
+      name: 'gdprConsent',
+      type: 'checkbox',
+      label: 'Consimțământ GDPR',
+      admin: { readOnly: true, description: 'Bifat de utilizator la trimiterea formularului.' },
+    },
+    {
+      name: 'gdprConsentAt',
+      type: 'date',
+      label: 'Data consimțământului',
+      admin: { readOnly: true, date: { pickerAppearance: 'dayAndTime' } },
+    },
   ],
 }
